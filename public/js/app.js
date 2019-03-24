@@ -2274,13 +2274,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pool",
-  props: ['id'],
+  props: ['id', 'pool'],
   components: {
     PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      pool: {},
       typeClients: [],
       products: []
     };
@@ -2300,7 +2299,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(id);
 
       if (this.id) {
-        console.log(id);
+        console.log(this.id);
         this.fetchData();
       }
     })
@@ -2457,7 +2456,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PoolForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PoolForm */ "./resources/js/components/Pools/PoolForm.vue");
+/* harmony import */ var _plugins_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../plugins/helpers */ "./resources/js/plugins/helpers.js");
+/* harmony import */ var _PoolForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PoolForm */ "./resources/js/components/Pools/PoolForm.vue");
+//
+//
 //
 //
 //
@@ -2490,13 +2492,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pools",
   components: {
-    PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+    PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
+      helpers: _plugins_helpers__WEBPACK_IMPORTED_MODULE_0__["helpers"],
       pools: [],
       typeClients: [],
       products: [],
@@ -2547,21 +2551,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/pools').then(function (response) {
-        _this.pools = response.data.data;
+        _this.pools = response.data;
       });
     },
     getTypeClients: function getTypeClients() {
       var _this2 = this;
 
       axios.get('/api/type-clients').then(function (response) {
-        _this2.typeClients = response.data.data;
+        _this2.typeClients = response.data;
       });
     },
     getProducts: function getProducts() {
       var _this3 = this;
 
       axios.get('/api/products').then(function (response) {
-        _this3.products = response.data.data;
+        _this3.products = response.data;
       });
     }
   }
@@ -40248,27 +40252,39 @@ var render = function() {
                 key: "items",
                 fn: function(props) {
                   return [
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.numberclients) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.typeclient_name) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(_vm._s(props.item.product_name))
-                    ])
+                    _c(
+                      "tr",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.helpers.goLink("/pool/" + props.item.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.numberclients) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.typeclient_name) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.product_name))
+                        ])
+                      ]
+                    )
                   ]
                 }
               }
@@ -79612,8 +79628,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/hackathon/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/hackathon/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/samoliver/Code/salesmith/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/samoliver/Code/salesmith/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

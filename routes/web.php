@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function() {
 
     /*POOLS*/
     Route::get( '/pool/{id}', function ($id) {
-        return view( 'pool' , ['id' => $id]);
+        return view( 'pool' , ['id' => $id, 'pool' => \App\Pool::find($id)]);
     } );
     Route::get( '/pools', function () {
         return view( 'pools' );

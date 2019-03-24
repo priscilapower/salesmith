@@ -21,13 +21,12 @@
 
     export default {
         name: "Pool",
-        props: ['id'],
+        props: ['id', 'pool'],
         components: {
             PoolForm,
         },
         data() {
             return {
-                pool: {},
                 typeClients: [],
                 products: [],
             };
@@ -36,7 +35,7 @@
             id(){
                 console.log(id);
                 if(this.id) {
-                    console.log(id)
+                    console.log(this.id)
                     this.fetchData();
                 }
             }

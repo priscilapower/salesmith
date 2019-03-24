@@ -15,14 +15,16 @@
                     class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
-                    <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">
-                        {{ props.item.numberclients }}
-                    </td>
-                    <td class="text-xs-right">
-                        {{ props.item.typeclient_name }}
-                    </td>
-                    <td class="text-xs-right">{{ props.item.product_name }}</td>
+                    <tr @click="helpers.goLink(`/pool/${props.item.id}`)">
+                        <td>{{ props.item.name }}</td>
+                        <td class="text-xs-right">
+                            {{ props.item.numberclients }}
+                        </td>
+                        <td class="text-xs-right">
+                            {{ props.item.typeclient_name }}
+                        </td>
+                        <td class="text-xs-right">{{ props.item.product_name }}</td>
+                    </tr>
                 </template>
             </v-data-table>
         </v-layout>
@@ -30,6 +32,7 @@
 </template>
 
 <script>
+    import {helpers} from "../../plugins/helpers";
     import PoolForm from "./PoolForm";
 
     export default {
@@ -39,6 +42,7 @@
         },
         data() {
             return {
+                helpers,
                 pools: [],
                 typeClients: [],
                 products: [],
@@ -97,17 +101,17 @@
         methods: {
             fetchData() {
                 axios.get('/api/pools').then( response => {
-                    this.pools = response.data.data;
+                    this.pools = response.data;
                 });
             },
             getTypeClients() {
                 axios.get('/api/type-clients').then( response => {
-                    this.typeClients = response.data.data;
+                    this.typeClients = response.data;
                 });
             },
             getProducts() {
                 axios.get('/api/products').then( response => {
-                    this.products = response.data.data;
+                    this.products = response.data;
                 });
             }
         }
