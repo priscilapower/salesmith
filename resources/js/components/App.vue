@@ -3,7 +3,7 @@
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>Salesmith</span>
-        <span class="font-weight-light">Manager Dashboard</span>
+        <span class="font-weight-light">{{pageTitle}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -34,7 +34,7 @@ export default {
   },
   data () {
     return {
-      //
+      pageTitle: 'Manager Dashboard',
     }
   }
 }
