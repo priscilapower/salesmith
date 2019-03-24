@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <div id="app" user="{{Auth::user()}}" v-cloak>
+    <div id="app" user="{{Auth::user()}}" roles="{{auth()->user()->roles}}" v-cloak>
         <v-app>
             <v-toolbar app>
                 <v-toolbar-title class="headline text-uppercase">

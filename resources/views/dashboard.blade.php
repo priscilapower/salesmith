@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<dashboard></dashboard>
+<dashboard :role-ids="roleIds"></dashboard>
 @endsection

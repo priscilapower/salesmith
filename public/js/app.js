@@ -1953,6 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
+  props: ['roleIds'],
   components: {
     DashboardManager: _DashboardManager__WEBPACK_IMPORTED_MODULE_0__["default"],
     DashboardSales: _DashboardSales__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2284,6 +2285,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -2336,24 +2345,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Form",
-  props: ['mode', 'entityName'],
+  name: "PoolForm",
+  props: ['typeClients', 'products'],
   data: function data() {
     return {
       dialog: false,
-      payload: this.makePayload(),
-      pools: [],
-      typeClients: []
+      payload: this.makePayload()
     };
   },
   methods: {
     makePayload: function makePayload() {
       return {
         name: '',
-        numberclients: 0,
+        numberclients: null,
         typeclient_id: null,
         product_id: null
       };
+    },
+    saveForm: function saveForm() {
+      var _this = this;
+
+      var payload = _objectSpread({}, this.payload);
+
+      axios.post('/api/pools', payload).then(function (r) {
+        _this.$emit('refresh');
+
+        _this.dialog = false;
+
+        _this.makePayload();
+      });
     }
   }
 });
@@ -2410,6 +2430,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       pools: [],
+      typeClients: [],
+      products: [],
       headers: [{
         text: "Pool name",
         align: "left",
@@ -2444,8 +2466,36 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  created: function created() {
+    this.fetchData();
+    this.getTypeClients();
+    this.getProducts();
+  },
   mounted: function mounted() {
     this.$root.pageTitle = "Pools";
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get('/api/pools').then(function (response) {
+        _this.pools = response.data.data;
+      });
+    },
+    getTypeClients: function getTypeClients() {
+      var _this2 = this;
+
+      axios.get('/api/type-clients').then(function (response) {
+        _this2.typeClients = response.data.data;
+      });
+    },
+    getProducts: function getProducts() {
+      var _this3 = this;
+
+      axios.get('/api/products').then(function (response) {
+        _this3.products = response.data.data;
+      });
+    }
   }
 });
 
@@ -39241,7 +39291,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("dashboard-manager"), _vm._v(" "), _c("dashboard-sales")],
+    [
+      _vm.roleIds.includes(1) || _vm.roleIds.includes(2)
+        ? _c("dashboard-manager")
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.roleIds.includes(1) || _vm.roleIds.includes(3)
+        ? _c("dashboard-sales")
+        : _vm._e()
+    ],
     1
   )
 }
@@ -39926,6 +39984,8 @@ var render = function() {
                               _c("v-select", {
                                 attrs: {
                                   items: _vm.typeClients,
+                                  "item-text": "name",
+                                  "item-value": "id",
                                   label: "Type of clients",
                                   required: ""
                                 },
@@ -39953,6 +40013,8 @@ var render = function() {
                                 attrs: {
                                   items: _vm.products,
                                   label: "Products",
+                                  "item-text": "name",
+                                  "item-value": "id",
                                   required: ""
                                 },
                                 model: {
@@ -40006,7 +40068,7 @@ var render = function() {
                       attrs: { color: "blue darken-1", flat: "" },
                       on: {
                         click: function($event) {
-                          _vm.dialog = false
+                          return _vm.saveForm()
                         }
                       }
                     },
@@ -40070,7 +40132,14 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c("pool-form")
+          _c("pool-form", {
+            attrs: { "type-clients": _vm.typeClients, products: _vm.products },
+            on: {
+              refresh: function($event) {
+                return _vm.fetchData()
+              }
+            }
+          })
         ],
         1
       ),
@@ -78469,7 +78538,8 @@ var app = new Vue({
   },
   provide: function provide() {
     return {
-      user: this.user
+      user: this.user,
+      roleIds: this.roleIds
     };
   },
   mounted: function mounted() {
@@ -78477,11 +78547,24 @@ var app = new Vue({
   },
   data: {
     user: {},
+    roles: [],
     pageTitle: ""
+  },
+  computed: {
+    roleIds: function roleIds() {
+      if (this.roles.length) {
+        return this.roles.map(function (role) {
+          return role.id;
+        });
+      }
+
+      return [];
+    }
   },
   methods: {
     parseAttributes: function parseAttributes() {
       this.user = this.$el.attributes.user ? JSON.parse(this.$el.attributes.user.value) : {};
+      this.roles = this.$el.attributes.roles ? JSON.parse(this.$el.attributes.roles.value) : {};
     },
     signout: function signout() {
       axios.post('/logout').then(function () {

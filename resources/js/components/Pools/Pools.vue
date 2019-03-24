@@ -6,7 +6,7 @@
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <pool-form></pool-form>
+            <pool-form :type-clients="typeClients" :products="products" @refresh="fetchData()"></pool-form>
         </v-layout>
         <v-layout>
             <v-data-table
@@ -40,6 +40,8 @@
         data() {
             return {
                 pools: [],
+                typeClients: [],
+                products: [],
                 headers: [
                     {
                         text: "Pool name",
@@ -84,8 +86,30 @@
 
             };
         },
+        created() {
+            this.fetchData();
+            this.getTypeClients();
+            this.getProducts();
+        },
         mounted() {
             this.$root.pageTitle = "Pools";
+        },
+        methods: {
+            fetchData() {
+                axios.get('/api/pools').then( response => {
+                    this.pools = response.data.data;
+                });
+            },
+            getTypeClients() {
+                axios.get('/api/type-clients').then( response => {
+                    this.typeClients = response.data.data;
+                });
+            },
+            getProducts() {
+                axios.get('/api/products').then( response => {
+                    this.products = response.data.data;
+                });
+            }
         }
     }
 </script>
