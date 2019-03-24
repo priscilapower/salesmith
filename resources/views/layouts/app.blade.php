@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <div id="app" v-cloak>
+    <div id="app" user="{{Auth::user()}}" v-cloak>
         <v-app>
             <v-toolbar app>
                 <v-toolbar-title class="headline text-uppercase">
@@ -23,10 +23,14 @@
                 <v-spacer></v-spacer>
                 <v-btn
                         flat
-                        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-                        target="_blank"
+                        @click="signout()"
                 >
-                    <span class="mr-2">A button!</span>
+                    @if (Auth::user())
+                    <span class="mr-2" >Sign out</span>
+                    @else
+                    @endif
+
+
                 </v-btn>
             </v-toolbar>
 

@@ -127,7 +127,7 @@
         };
     },
         mounted() {
-            this.$parent.pageTitle = "Manager Dashboard";
+            this.$root.pageTitle = "Manager Dashboard";
         }
 };
 </script>
