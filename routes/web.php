@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Auth::routes();
+//Auth::routes();
 
 
 /*POOLS*/
