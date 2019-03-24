@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PoolController extends Controller
+class ContractController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +13,7 @@ class PoolController extends Controller
      */
     public function index()
     {
-        return view('admin.pool',
-            [
-                Pool::all()
-            ]
-        );
+        //
     }
 
     /**
@@ -38,12 +34,7 @@ class PoolController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            Pool::create($request->all());
-        } catch (Exception $e) {
-            Log::error(trans('messages.error.store', 'Pool'));
-            return redirect()->back()->withErrors(trans('messages.error.store', 'Pool'));
-        }
+        //
     }
 
     /**
@@ -65,6 +56,7 @@ class PoolController extends Controller
      */
     public function edit($id)
     {
+        //
     }
 
     /**
@@ -76,16 +68,7 @@ class PoolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            $pool = Pool::find($id);
-
-            $pool::update($request->all());
-
-            return redirect()->route('pool-index');
-        } catch (Exception $e) {
-            Log::error(trans('messages.error.update', 'Pool'));
-            return redirect()->back()->withErrors(trans('messages.error.update', 'Pool'));
-        }
+        //
     }
 
     /**
@@ -96,13 +79,6 @@ class PoolController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Pool::destroy($id);
-
-            return redirect()->route('pool-index');
-        } catch (Exception $e) {
-            Log::error(trans('messages.error.destroy', 'Pool'), $e->getMessage());
-            return redirect()->back()->withErrors(trans('messages.error.destroy', 'Pool'));
-        }
+        //
     }
 }

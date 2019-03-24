@@ -2,7 +2,7 @@
     <v-container>
         <v-layout>
             <v-flex xs4>
-                <v-card class="mx-3 my-3">
+                <v-card class="mx-3 my-3 cursor-pointer" @click="helpers.goLink('pools')">
                     <v-card-title
                         ><span class="title">Pools</span></v-card-title
                     >
@@ -21,7 +21,7 @@
                 </v-card>
             </v-flex>
             <v-flex xs4>
-                <v-card class="mx-3 my-3">
+                <v-card class="mx-3 my-3 cursor-pointer" @click="helpers.goLink('pools')">
                     <v-card-title
                         ><span class="title"
                             >Potential leads</span
@@ -42,7 +42,7 @@
                 </v-card>
             </v-flex>
             <v-flex xs4>
-                <v-card class="mx-3 my-3">
+                <v-card class="mx-3 my-3 cursor-pointer" @click="helpers.goLink('pools')">
                     <v-card-title
                         ><span class="title"
                             >Avg% pool mapped</span
@@ -65,7 +65,7 @@
         </v-layout>
         <v-layout>
             <v-flex xs6>
-                <v-card class="mx-3 my-3">
+                <v-card class="mx-3 my-3 cursor-pointer" @click="helpers.goLink('clients')">
                     <v-card-title
                         ><span class="title"
                             >Avg% mapped to proposal</span
@@ -86,7 +86,7 @@
                 </v-card>
             </v-flex>
             <v-flex xs6>
-                <v-card class="mx-3 my-3">
+                <v-card class="mx-3 my-3 cursor-pointer" @click="helpers.goLink('contacts')">
                     <v-card-title
                         ><span class="title"
                             >Contacts/day (last 15 days)</span
@@ -116,14 +116,24 @@
 </template>
 
 <script>
-export default {
+    import {helpers} from "../../plugins/helpers";
+
+    export default {
     name: "DashboardManager",
     data() {
         return {
+            helpers,
             trend: [6, 7, 8, 3, 5, 9, 3, 1]
         };
-    }
+    },
+        mounted() {
+            this.$root.pageTitle = "Manager Dashboard";
+        }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+</style>

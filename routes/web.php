@@ -11,10 +11,51 @@
 |
 */
 
+
+
+Route::redirect('/home', '/dashboard');
+
 Route::get('/', function () {
-    return view('welcome');
+    if (!Auth::user()) {
+        return redirect()->route('login');
+    }
+    return redirect()->route('dashboard');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function() {
+
+    /*DASHBOARD*/
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');;
+
+    /*POOLS*/
+    Route::get( '/pool/{id}', function () {
+        return view( 'pool' );
+    } );
+    Route::get( '/pools', function () {
+        return view( 'pools' );
+    } );
+
+    /*CLIENTS*/
+    Route::get( '/clients', function () {
+        return view( 'clients' );
+    } );
+
+    /*CONTACTS*/
+    Route::get( '/contacts', function () {
+        return view( 'contacts' );
+    } );
+
+    /*PRODUCTS*/
+    Route::get( '/products', function () {
+        return view( 'products' );
+    } );
+
+    /*PRODUCTS*/
+    Route::get( '/type-clients', function () {
+        return view( 'type_clients' );
+    } );
+});
