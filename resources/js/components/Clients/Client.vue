@@ -6,24 +6,24 @@
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <pool-form :payload-edit="pool" :type-clients="typeClients" :products="products" @refresh="fetchData()"></pool-form>
+            <client-form :payload-edit="client" :type-clients="typeClients" :products="products" @refresh="fetchData()"></client-form>
         </v-layout>
         <v-layout>
 
-            {{pool}}
+            {{client}}
 
         </v-layout>
     </v-container>
 </template>
 
 <script>
-    import PoolForm from "./PoolForm";
+    import ClientForm from "./ClientForm";
 
     export default {
-        name: "Pool",
-        props: ['id', 'pool'],
+        name: "Client",
+        props: ['id', 'client'],
         components: {
-            PoolForm,
+            ClientForm,
         },
         data() {
             return {
@@ -49,12 +49,12 @@
             }
         },
         mounted() {
-            this.$root.pageTitle = `Pool ${this.id}`;
+            this.$root.pageTitle = `Client ${this.id}`;
         },
         methods: {
             fetchData() {
-                axios.get(`/api/pools/${this.pool.id}/edit`).then( response => {
-                    this.pool = response.data;
+                axios.get(`/api/clients/${this.client.id}/edit`).then( response => {
+                    this.client = response.data;
                 });
             },
             getTypeClients() {

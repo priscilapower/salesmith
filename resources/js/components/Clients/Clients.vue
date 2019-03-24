@@ -13,7 +13,7 @@
         <v-layout>
             <v-data-table
                     :headers="headers"
-                    :items="contacts"
+                    :items="clients"
                     class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
@@ -44,7 +44,9 @@
         name: "Clients",
         data() {
             return {
-                contacts: [],
+                users: [],
+                pools: [],
+                clients: [],
                 headers: [
                     {
                         text: "Name",
@@ -85,9 +87,30 @@
                 ]
             };
         },
-
+        created() {
+            this.fetchData();
+           /* this.getTypeClients();
+            this.getProducts();*/
+        },
         mounted() {
             this.$root.pageTitle = "Clients";
+        },
+        methods: {
+            fetchData() {
+                axios.get('/api/clients').then( response => {
+                    this.clients = response.data;
+                });
+            },
+            getTypeClients() {
+                axios.get('/api/type-clients').then( response => {
+                    this.typeClients = response.data;
+                });
+            },
+            getProducts() {
+                axios.get('/api/products').then( response => {
+                    this.products = response.data;
+                });
+            }
         }
     }
 </script>

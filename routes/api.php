@@ -20,4 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['role:admin|manager', 'auth'], function(){
     Route::resource('pools', 'PoolController');
     Route::resource('type-clients', 'TypeClientController');
+    Route::resource('products', 'ProductController');
+    Route::resource('clients', 'ClientController');
+    Route::resource('contacts', 'ContactController');
 });

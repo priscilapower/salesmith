@@ -17,14 +17,14 @@
                 class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
-                    <td>{{ props.item.client_name }}</td>
+                    <td>{{ props.item.user_id }}</td>
                     <td class="text-xs-right">
-                        {{ props.item.client_status }}
+                        {{ props.item.client_id }}
                     </td>
                     <td class="text-xs-right">
-                        {{ props.item.salesperson_name }}
+                        {{ props.item.message }}
                     </td>
-                    <td class="text-xs-right">{{ props.item.contacted_at }}</td>
+                    <td class="text-xs-right">{{ props.item.contact_at }}</td>
                 </template>
             </v-data-table>
         </v-layout>
@@ -39,28 +39,28 @@ export default {
             contacts: [],
             headers: [
                 {
-                    text: "Client name",
+                    text: "Client",
                     align: "left",
                     sortable: true,
-                    value: "client_name"
+                    value: "client_id"
                 },
                 {
-                    text: "Client status",
+                    text: "User",
                     align: "left",
                     sortable: true,
-                    value: "client_status"
+                    value: "user_id"
                 },
                 {
-                    text: "Salesperson",
+                    text: "Message",
                     align: "left",
                     sortable: true,
-                    value: "salesperson_name"
+                    value: "message"
                 },
                 {
                     text: "Date",
                     align: "right",
                     sortable: true,
-                    value: "contacted_at"
+                    value: "contact_at"
                 }
             ]
         };
@@ -68,11 +68,18 @@ export default {
     mounted() {
         this.$root.pageTitle = "Contacts";
     },
+    created() {
+        this.fetchData();
+    },
+
     methods: {
-        newContact() {
-            console.warn("*");
-        }
-    }
+        fetchData() {
+            axios.get('/api/contacts').then( response => {
+                this.contacts = response.data;
+            });
+        },
+    },
+
 };
 </script>
 

@@ -32,14 +32,17 @@ Route::middleware('auth')->group(function() {
     })->name('dashboard');;
 
     /*POOLS*/
-    Route::get( '/pool/{id}', function () {
-        return view( 'pool' );
+    Route::get( '/pool/{id}', function ($id) {
+        return view( 'pool' , ['id' => $id, 'pool' => \App\Pool::find($id)]);
     } );
     Route::get( '/pools', function () {
         return view( 'pools' );
     } );
 
     /*CLIENTS*/
+    Route::get( '/client/{id}', function ($id) {
+        return view( 'client' , ['id' => $id, 'client' => \App\Client::find($id)]);
+    } );
     Route::get( '/clients', function () {
         return view( 'clients' );
     } );
