@@ -66,12 +66,10 @@ class PoolController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $pool = Pool::find($id);
-            $pool::update($request->all());
+            $pool = Pool::find($id)->update($request->all());
             return response(['pool' => $pool, 'message' => trans('messages.success.update', ['value' => 'Pool']), 'status' => 'success']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            Log::error(trans('messages.error.update', ['value' => 'Pool']));
+            Log::error(trans('messages.error.update', ['value' => 'Pool']), ['message' => $e->getMessage()]);
             return response(['message' => trans('messages.error.update', ['value' => 'Pool']), 'status' => 'error']);
         }
     }

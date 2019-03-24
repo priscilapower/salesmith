@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['role:admin|manager', 'auth'], function(){
     Route::resource('pools', 'PoolController');
+    Route::resource('type-clients', 'TypeClientController');
 });
