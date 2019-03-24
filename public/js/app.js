@@ -2413,12 +2413,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PoolForm",
-  props: ['typeClients', 'products'],
+  props: ['typeClients', 'products', 'payloadEdit'],
   data: function data() {
     return {
       dialog: false,
       payload: this.makePayload()
     };
+  },
+  watch: {
+    payloadEdit: function payloadEdit() {
+      if (this.payloadEdit.hasOwnProperty('id')) {
+        this.payload = _objectSpread({}, this.payloadEdit);
+      }
+    }
   },
   methods: {
     makePayload: function makePayload() {
@@ -39940,7 +39947,7 @@ var render = function() {
           _vm._v(" "),
           _c("pool-form", {
             attrs: {
-              payload: _vm.pool,
+              "payload-edit": _vm.pool,
               "type-clients": _vm.typeClients,
               products: _vm.products
             },
@@ -39998,7 +40005,7 @@ var render = function() {
                   _c(
                     "v-btn",
                     _vm._g({ attrs: { color: "primary", dark: "" } }, on),
-                    [_vm._v("New Pool")]
+                    [_vm._v(_vm._s(_vm.payloadEdit ? "Edit Pool" : "New Pool"))]
                   )
                 ]
               }
