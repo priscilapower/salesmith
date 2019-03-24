@@ -6,9 +6,7 @@
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="newContact()">
-                <span class="mr-2">New contact</span>
-            </v-btn>
+            <pool-form></pool-form>
         </v-layout>
         <v-layout>
             <v-data-table
@@ -32,37 +30,58 @@
 </template>
 
 <script>
+    import PoolForm from "./PoolForm";
+
     export default {
-        name: "Pool",
+        name: "Pools",
+        components: {
+            PoolForm,
+        },
         data() {
             return {
-                contacts: [],
+                pools: [],
                 headers: [
                     {
                         text: "Pool name",
                         align: "left",
                         sortable: true,
-                        value: "name"
+                        value: "name",
+                        required: true,
+                        type: "text",
+
                     },
                     {
                         text: "# potential clients",
                         align: "left",
                         sortable: true,
-                        value: "numberclients"
+                        value: "numberclients",
+                        required: true,
+                        type: "text",
+
                     },
                     {
                         text: "Type of client",
                         align: "left",
                         sortable: true,
-                        value: "typeclient_name"
+                        value: "typeclient_id",
+                        type: "select",
                     },
                     {
                         text: "Product",
-                        align: "product_name",
+                        align: "left",
                         sortable: true,
-                        value: "contacted_at"
+                        value: "product_id",
+                        type: "text",
+
                     }
-                ]
+                ],
+                payloadTemplate: {
+                    name: '',
+                    numberclients: '',
+                    typeclient_id: '',
+
+                },
+
             };
         },
         mounted() {
