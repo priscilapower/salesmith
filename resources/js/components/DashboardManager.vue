@@ -97,11 +97,13 @@
                     >
                         <v-sparkline
                             :value="trend"
+                            :labels="trend"
+                            show-labels
                             :height="118"
                             :gradient="['#000', '#F44']"
                             :smooth="3"
-                            :padding="3"
-                            :line-width="3"
+                            :padding="10"
+                            :line-width="2"
                             :stroke-linecap="'round'"
                             :gradient-direction="'right'"
                             auto-draw

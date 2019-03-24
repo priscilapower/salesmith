@@ -1929,6 +1929,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardManager",
   data: function data() {
@@ -2054,21 +2056,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardSales",
   data: function data() {
     return {
-      trend: [6, 7, 8, 3, 5, 9, 3, 1]
+      trend: [0, 5, 8, 18, 21, 23, 31, 34]
     };
   }
 });
@@ -38424,11 +38416,13 @@ var render = function() {
                       _c("v-sparkline", {
                         attrs: {
                           value: _vm.trend,
+                          labels: _vm.trend,
+                          "show-labels": "",
                           height: 118,
                           gradient: ["#000", "#F44"],
                           smooth: 3,
-                          padding: 3,
-                          "line-width": 3,
+                          padding: 10,
+                          "line-width": 2,
                           "stroke-linecap": "round",
                           "gradient-direction": "right",
                           "auto-draw": ""
@@ -38478,13 +38472,13 @@ var render = function() {
       _c(
         "v-layout",
         [
-          _c("v-flex", { attrs: { xs6: "" } }, [
+          _c("v-flex", { attrs: { xs12: "" } }, [
             _c(
               "div",
               [
                 _c(
                   "v-card",
-                  { staticClass: "mx-3 my-3" },
+                  { staticClass: "mx-3 my-3 cursor-pointer" },
                   [
                     _c("v-card-title", [
                       _c("span", { staticClass: "title" }, [_vm._v("Pool #1")])
@@ -38499,48 +38493,112 @@ var render = function() {
                       [
                         _c(
                           "v-flex",
+                          { staticClass: "text-xs-center" },
                           [
                             _c(
                               "v-progress-circular",
-                              { attrs: { width: 10, size: 200, value: 100 } },
+                              {
+                                attrs: {
+                                  width: 10,
+                                  size: 200,
+                                  value: 100,
+                                  color: "yellow"
+                                }
+                              },
                               [
                                 _c("div", { staticClass: "display-4" }, [
                                   _vm._v("12")
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "text-no-wrap" }, [
-                                  _vm._v(
-                                    "\n                                    potential clients\n                                "
-                                  )
                                 ])
                               ]
-                            )
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "subheading" }, [
+                              _vm._v("Potential proposals")
+                            ])
                           ],
                           1
                         ),
                         _vm._v(" "),
                         _c(
                           "v-flex",
+                          { staticClass: "text-xs-center" },
                           [
                             _c(
                               "v-progress-circular",
-                              { attrs: { width: 10, size: 200, value: 50 } },
+                              {
+                                attrs: {
+                                  width: 10,
+                                  size: 200,
+                                  value: 75,
+                                  color: "orange"
+                                }
+                              },
                               [
-                                _c("div", { staticClass: "display-4" }, [
+                                _c("span", { staticClass: "display-4" }, [
+                                  _vm._v("9")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "subheading" }, [
+                              _vm._v("Clients")
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-flex",
+                          { staticClass: "text-xs-center" },
+                          [
+                            _c(
+                              "v-progress-circular",
+                              {
+                                attrs: {
+                                  width: 10,
+                                  size: 200,
+                                  value: 75,
+                                  color: "red"
+                                }
+                              },
+                              [
+                                _c("span", { staticClass: "display-4" }, [
+                                  _vm._v("9")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "subheading" }, [
+                              _vm._v("Contacts (past 15 days)")
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-flex",
+                          { staticClass: "text-xs-center" },
+                          [
+                            _c(
+                              "v-progress-circular",
+                              {
+                                attrs: {
+                                  width: 10,
+                                  size: 200,
+                                  value: 50,
+                                  color: "purple"
+                                }
+                              },
+                              [
+                                _c("span", { staticClass: "display-4" }, [
                                   _vm._v("6")
                                 ])
                               ]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "text-center subheading" },
-                              [
-                                _vm._v(
-                                  "\n                                Clients\n                            "
-                                )
-                              ]
-                            )
+                            _c("div", { staticClass: "subheading" }, [
+                              _vm._v("Proposals")
+                            ])
                           ],
                           1
                         )
@@ -38553,47 +38611,7 @@ var render = function() {
               ],
               1
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "mx-3 my-3" },
-                [
-                  _c("v-card-title", [
-                    _c("span", { staticClass: "title" }, [
-                      _vm._v("Avg% pool mapped")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    {
-                      staticClass:
-                        "d-flex justify-content-center align-items-center"
-                    },
-                    [
-                      _c(
-                        "v-progress-circular",
-                        { attrs: { width: 10, size: 200, value: 100 } },
-                        [
-                          _c("span", { staticClass: "display-4" }, [
-                            _vm._v("12")
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
+          ])
         ],
         1
       ),
@@ -38603,7 +38621,7 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs6: "" } },
+            { attrs: { xs12: "" } },
             [
               _c(
                 "v-card",
@@ -38611,47 +38629,7 @@ var render = function() {
                 [
                   _c("v-card-title", [
                     _c("span", { staticClass: "title" }, [
-                      _vm._v("Avg% mapped to proposal")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    {
-                      staticClass:
-                        "d-flex justify-content-center align-items-center"
-                    },
-                    [
-                      _c(
-                        "v-progress-circular",
-                        { attrs: { width: 10, size: 200, value: 100 } },
-                        [
-                          _c("span", { staticClass: "display-4" }, [
-                            _vm._v("12")
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs6: "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "mx-3 my-3" },
-                [
-                  _c("v-card-title", [
-                    _c("span", { staticClass: "title" }, [
-                      _vm._v("Contacts/day (last 15 days)")
+                      _vm._v("Pool #1 mapped %")
                     ])
                   ]),
                   _vm._v(" "),
@@ -38665,11 +38643,12 @@ var render = function() {
                       _c("v-sparkline", {
                         attrs: {
                           value: _vm.trend,
-                          height: 118,
-                          gradient: ["#000", "#F44"],
+                          labels: _vm.trend,
+                          "show-labels": "",
+                          gradient: ["#F44", "#000"],
                           smooth: 3,
-                          padding: 3,
-                          "line-width": 3,
+                          padding: 10,
+                          "line-width": 2,
                           "stroke-linecap": "round",
                           "gradient-direction": "right",
                           "auto-draw": ""

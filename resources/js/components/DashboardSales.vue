@@ -1,95 +1,84 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs6>
+            <v-flex xs12>
                 <div>
-                    <v-card class="mx-3 my-3">
+                    <v-card class="mx-3 my-3 cursor-pointer">
                         <v-card-title
                             ><span class="title">Pool #1</span></v-card-title
                         >
                         <v-card-text
                             class="d-flex justify-content-center align-items-center"
                         >
-                            <v-flex>
+                            <v-flex class="text-xs-center">
                                 <v-progress-circular
                                     :width="10"
                                     :size="200"
                                     :value="100"
+                                    :color="'yellow'"
+                                    >
+                                    <div class="display-4"
+                                        >12</div
+                                    >
+                                </v-progress-circular
                                 >
-                                    <div class="display-4">12</div>
-                                    <div class="text-no-wrap">
-                                        potential clients
-                                    </div>
-                                </v-progress-circular>
+                                <div class="subheading">Potential proposals</div>
+
                             </v-flex>
 
-                            <v-flex>
+                            <v-flex class="text-xs-center">
                                 <v-progress-circular
                                     :width="10"
                                     :size="200"
-                                    :value="50"
+                                    :value="75"
+                                    :color="'orange'"
+
+                                ><span class="display-4"
+                                        >9</span
+                                    ></v-progress-circular
                                 >
-                                    <div class="display-4">6</div>
-                                    </v-progress-circular
+                                <div class="subheading">Clients</div>
+                            </v-flex>
+
+                            <v-flex class="text-xs-center">
+                                <v-progress-circular
+                                        :width="10"
+                                        :size="200"
+                                        :value="75"
+                                        :color="'red'"
+
+                                ><span class="display-4"
+                                >9</span
+                                ></v-progress-circular
                                 >
-                                <div class="text-center subheading">
-                                    Clients
-                                </div>
+                                <div class="subheading">Contacts (past 15 days)</div>
+                            </v-flex>
+
+                            <v-flex class="text-xs-center">
+                                <v-progress-circular
+                                        :width="10"
+                                        :size="200"
+                                        :value="50"
+                                        :color="'purple'"
+
+                                ><span class="display-4"
+                                >6</span
+                                ></v-progress-circular
+                                >
+                                <div class="subheading">Proposals</div>
                             </v-flex>
                         </v-card-text>
                     </v-card>
                 </div>
             </v-flex>
-
-            <v-flex xs4>
-                <v-card class="mx-3 my-3">
-                    <v-card-title
-                        ><span class="title"
-                            >Avg% pool mapped</span
-                        ></v-card-title
-                    >
-                    <v-card-text
-                        class="d-flex justify-content-center align-items-center"
-                    >
-                        <v-progress-circular
-                            :width="10"
-                            :size="200"
-                            :value="100"
-                            ><span class="display-4"
-                                >12</span
-                            ></v-progress-circular
-                        >
-                    </v-card-text>
-                </v-card>
-            </v-flex>
         </v-layout>
+
         <v-layout>
-            <v-flex xs6>
+            <v-flex xs12>
                 <v-card class="mx-3 my-3">
                     <v-card-title
                         ><span class="title"
-                            >Avg% mapped to proposal</span
-                        ></v-card-title
-                    >
-                    <v-card-text
-                        class="d-flex justify-content-center align-items-center"
-                    >
-                        <v-progress-circular
-                            :width="10"
-                            :size="200"
-                            :value="100"
-                            ><span class="display-4"
-                                >12</span
-                            ></v-progress-circular
-                        >
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-            <v-flex xs6>
-                <v-card class="mx-3 my-3">
-                    <v-card-title
-                        ><span class="title"
-                            >Contacts/day (last 15 days)</span
+                            >Pool #1 mapped %</span
                         ></v-card-title
                     >
                     <v-card-text
@@ -97,11 +86,12 @@
                     >
                         <v-sparkline
                             :value="trend"
-                            :height="118"
-                            :gradient="['#000', '#F44']"
+                            :labels="trend"
+                            show-labels
+                            :gradient="['#F44','#000']"
                             :smooth="3"
-                            :padding="3"
-                            :line-width="3"
+                            :padding="10"
+                            :line-width="2"
                             :stroke-linecap="'round'"
                             :gradient-direction="'right'"
                             auto-draw
@@ -118,7 +108,7 @@ export default {
     name: "DashboardSales",
     data() {
         return {
-            trend: [6, 7, 8, 3, 5, 9, 3, 1]
+            trend: [0, 5, 8, 18, 21, 23, 31, 34]
         };
     }
 };
