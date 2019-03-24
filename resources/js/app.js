@@ -56,7 +56,8 @@ const app = new Vue({
     },
     provide: function (){
         return {
-            user: this.user
+            user: this.user,
+            roleIds: this.roleIds
         };
     },
     mounted() {
@@ -64,11 +65,21 @@ const app = new Vue({
     },
     data: {
         user: {},
+        roles: [],
         pageTitle: ""
+    },
+    computed: {
+        roleIds() {
+            if (this.roles.length) {
+                return this.roles.map(role => role.id)
+            }
+            return [];
+        }
     },
     methods: {
         parseAttributes() {
             this.user = this.$el.attributes.user ? JSON.parse(this.$el.attributes.user.value) : {};
+            this.roles = this.$el.attributes.roles ? JSON.parse(this.$el.attributes.roles.value) : {};
         },
         signout() {
             axios.post('/logout').then(()=>{

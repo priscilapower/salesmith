@@ -1953,6 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
+  props: ['roleIds'],
   components: {
     DashboardManager: _DashboardManager__WEBPACK_IMPORTED_MODULE_0__["default"],
     DashboardSales: _DashboardSales__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2251,124 +2252,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Pools",
-  components: {},
-  mounted: function mounted() {
-    this.$root.pageTitle = "Pool";
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pools/PoolForm.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pools/PoolForm.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Form",
-  props: ['mode', 'entityName'],
-  data: function data() {
-    return {
-      dialog: false,
-      payload: this.makePayload(),
-      pools: [],
-      typeClients: []
-    };
-  },
-  methods: {
-    makePayload: function makePayload() {
-      return {
-        name: '',
-        numberclients: 0,
-        typeclient_id: null,
-        product_id: null
-      };
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pools/Pools.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pools/Pools.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PoolForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PoolForm */ "./resources/js/components/Pools/PoolForm.vue");
 //
 //
@@ -2388,6 +2271,213 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Pool",
+  props: ['id', 'pool'],
+  components: {
+    PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      typeClients: [],
+      products: []
+    };
+  },
+  watch: {
+    id: function (_id) {
+      function id() {
+        return _id.apply(this, arguments);
+      }
+
+      id.toString = function () {
+        return _id.toString();
+      };
+
+      return id;
+    }(function () {
+      console.log(id);
+
+      if (this.id) {
+        console.log(this.id);
+        this.fetchData();
+      }
+    })
+  },
+  created: function created() {
+    this.getTypeClients();
+    this.getProducts();
+
+    if (this.id) {
+      console.log(this.id);
+      this.fetchData();
+    }
+  },
+  mounted: function mounted() {
+    this.$root.pageTitle = "Pool ".concat(this.id);
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get("/api/pool/".concat(this.pool.id)).then(function (response) {
+        _this.pool = response.data;
+      });
+    },
+    getTypeClients: function getTypeClients() {
+      var _this2 = this;
+
+      axios.get('/api/type-clients').then(function (response) {
+        _this2.typeClients = response.data.data;
+      });
+    },
+    getProducts: function getProducts() {
+      var _this3 = this;
+
+      axios.get('/api/products').then(function (response) {
+        _this3.products = response.data.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pools/PoolForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pools/PoolForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PoolForm",
+  props: ['typeClients', 'products'],
+  data: function data() {
+    return {
+      dialog: false,
+      payload: this.makePayload()
+    };
+  },
+  methods: {
+    makePayload: function makePayload() {
+      return {
+        name: '',
+        numberclients: null,
+        typeclient_id: null,
+        product_id: null
+      };
+    },
+    saveForm: function saveForm() {
+      var _this = this;
+
+      var payload = _objectSpread({}, this.payload);
+
+      axios.post('/api/pools', payload).then(function (r) {
+        _this.$emit('refresh');
+
+        _this.dialog = false;
+
+        _this.makePayload();
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pools/Pools.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pools/Pools.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _plugins_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../plugins/helpers */ "./resources/js/plugins/helpers.js");
+/* harmony import */ var _PoolForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PoolForm */ "./resources/js/components/Pools/PoolForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2402,14 +2492,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pools",
   components: {
-    PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+    PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
+      helpers: _plugins_helpers__WEBPACK_IMPORTED_MODULE_0__["helpers"],
       pools: [],
+      typeClients: [],
+      products: [],
       headers: [{
         text: "Pool name",
         align: "left",
@@ -2444,8 +2538,36 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  created: function created() {
+    this.fetchData();
+    this.getTypeClients();
+    this.getProducts();
+  },
   mounted: function mounted() {
     this.$root.pageTitle = "Pools";
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get('/api/pools').then(function (response) {
+        _this.pools = response.data;
+      });
+    },
+    getTypeClients: function getTypeClients() {
+      var _this2 = this;
+
+      axios.get('/api/type-clients').then(function (response) {
+        _this2.typeClients = response.data;
+      });
+    },
+    getProducts: function getProducts() {
+      var _this3 = this;
+
+      axios.get('/api/products').then(function (response) {
+        _this3.products = response.data;
+      });
+    }
   }
 });
 
@@ -39241,7 +39363,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("dashboard-manager"), _vm._v(" "), _c("dashboard-sales")],
+    [
+      _vm.roleIds.includes(1) || _vm.roleIds.includes(2)
+        ? _c("dashboard-manager")
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.roleIds.includes(1) || _vm.roleIds.includes(3)
+        ? _c("dashboard-sales")
+        : _vm._e()
+    ],
     1
   )
 }
@@ -39791,15 +39921,40 @@ var render = function() {
       _c(
         "v-layout",
         [
-          _c("v-btn", { attrs: { flat: "", href: "/" } }, [
-            _c("span", { staticClass: "mr-2" }, [
-              _vm._v("Back to the Dashboard")
-            ])
-          ]),
-          _vm._v("\n        Pool details!\n    ")
+          _c(
+            "v-btn",
+            { attrs: { flat: "", href: "/" } },
+            [
+              _c("v-icon", { attrs: { left: "" } }, [
+                _vm._v("keyboard_backspace")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "mr-2" }, [
+                _vm._v("Back to the Dashboard")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("pool-form", {
+            attrs: {
+              payload: _vm.pool,
+              "type-clients": _vm.typeClients,
+              products: _vm.products
+            },
+            on: {
+              refresh: function($event) {
+                return _vm.fetchData()
+              }
+            }
+          })
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("v-layout", [_vm._v("\n\n        " + _vm._s(_vm.pool) + "\n\n    ")])
     ],
     1
   )
@@ -39926,6 +40081,8 @@ var render = function() {
                               _c("v-select", {
                                 attrs: {
                                   items: _vm.typeClients,
+                                  "item-text": "name",
+                                  "item-value": "id",
                                   label: "Type of clients",
                                   required: ""
                                 },
@@ -39953,6 +40110,8 @@ var render = function() {
                                 attrs: {
                                   items: _vm.products,
                                   label: "Products",
+                                  "item-text": "name",
+                                  "item-value": "id",
                                   required: ""
                                 },
                                 model: {
@@ -40006,7 +40165,7 @@ var render = function() {
                       attrs: { color: "blue darken-1", flat: "" },
                       on: {
                         click: function($event) {
-                          _vm.dialog = false
+                          return _vm.saveForm()
                         }
                       }
                     },
@@ -40070,7 +40229,14 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c("pool-form")
+          _c("pool-form", {
+            attrs: { "type-clients": _vm.typeClients, products: _vm.products },
+            on: {
+              refresh: function($event) {
+                return _vm.fetchData()
+              }
+            }
+          })
         ],
         1
       ),
@@ -40086,27 +40252,39 @@ var render = function() {
                 key: "items",
                 fn: function(props) {
                   return [
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.numberclients) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.typeclient_name) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(_vm._s(props.item.product_name))
-                    ])
+                    _c(
+                      "tr",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.helpers.goLink("/pool/" + props.item.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.numberclients) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.typeclient_name) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(_vm._s(props.item.product_name))
+                        ])
+                      ]
+                    )
                   ]
                 }
               }
@@ -78469,7 +78647,8 @@ var app = new Vue({
   },
   provide: function provide() {
     return {
-      user: this.user
+      user: this.user,
+      roleIds: this.roleIds
     };
   },
   mounted: function mounted() {
@@ -78477,11 +78656,24 @@ var app = new Vue({
   },
   data: {
     user: {},
+    roles: [],
     pageTitle: ""
+  },
+  computed: {
+    roleIds: function roleIds() {
+      if (this.roles.length) {
+        return this.roles.map(function (role) {
+          return role.id;
+        });
+      }
+
+      return [];
+    }
   },
   methods: {
     parseAttributes: function parseAttributes() {
       this.user = this.$el.attributes.user ? JSON.parse(this.$el.attributes.user.value) : {};
+      this.roles = this.$el.attributes.roles ? JSON.parse(this.$el.attributes.roles.value) : {};
     },
     signout: function signout() {
       axios.post('/logout').then(function () {

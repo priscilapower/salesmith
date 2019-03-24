@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -13,17 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $client = Client::all();
+        return response($client);
     }
 
     /**
@@ -34,18 +27,13 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        try {
+            $client = Client::create($request->all());
+            return response(['pool' => $client, 'message' => trans('messages.success.store', ['value' => 'Client']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.store', ['value' => 'Client']));
+            return response(['message' => trans('messages.error.store', ['value' => 'Client']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -56,7 +44,14 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+            $client = Client::find($id);
+
+            return response($client);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.find', ['value' => 'Client']));
+            return response(['message' => trans('messages.error.find', ['value' => 'Client']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -68,7 +63,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $client = Client::find($id)->update($request->all());
+
+            return response(['pool' => $client, 'message' => trans('messages.success.update', ['value' => 'Client']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.update', ['value' => 'Client']));
+            return response(['message' => trans('messages.error.update', ['value' => 'Client']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -79,6 +81,13 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Client::destroy($id);
+
+            return response(['message' => trans('messages.success.destroy', ['value' => 'Client']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.destroy', ['value' => 'Client']));
+            return response(['message' => trans('messages.error.destroy', ['value' => 'Client']), 'status' => 'error']);
+        }
     }
 }

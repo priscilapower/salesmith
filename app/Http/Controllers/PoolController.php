@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Pool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PoolController extends Controller
 {
@@ -13,22 +15,10 @@ class PoolController extends Controller
      */
     public function index()
     {
-        return view('admin.pool',
-            [
-                Pool::all()
-            ]
-        );
+        $pools = Pool::all();
+        return response($pools);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,23 +29,14 @@ class PoolController extends Controller
     public function store(Request $request)
     {
         try {
-            Pool::create($request->all());
-        } catch (Exception $e) {
-            Log::error(trans('messages.error.store', 'Pool'));
-            return redirect()->back()->withErrors(trans('messages.error.store', 'Pool'));
+            $pool = Pool::create($request->all());
+            return response(['pool' => $pool, 'message' => trans('messages.success.store', ['value' => 'Pool']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.store', ['value' => 'Pool']));
+            return response(['message' => trans('messages.error.store', ['value' => 'Pool']), 'status' => 'error']);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -65,6 +46,14 @@ class PoolController extends Controller
      */
     public function edit($id)
     {
+        try{
+            $pool = Pool::find($id);
+
+            return response($pool);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.find', ['value' => 'Pool']));
+            return response(['message' => trans('messages.error.find', ['value' => 'Pool']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -77,14 +66,11 @@ class PoolController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $pool = Pool::find($id);
-
-            $pool::update($request->all());
-
-            return redirect()->route('pool-index');
-        } catch (Exception $e) {
-            Log::error(trans('messages.error.update', 'Pool'));
-            return redirect()->back()->withErrors(trans('messages.error.update', 'Pool'));
+            $pool = Pool::find($id)->update($request->all());
+            return response(['pool' => $pool, 'message' => trans('messages.success.update', ['value' => 'Pool']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.update', ['value' => 'Pool']), ['message' => $e->getMessage()]);
+            return response(['message' => trans('messages.error.update', ['value' => 'Pool']), 'status' => 'error']);
         }
     }
 
@@ -99,10 +85,10 @@ class PoolController extends Controller
         try {
             Pool::destroy($id);
 
-            return redirect()->route('pool-index');
-        } catch (Exception $e) {
-            Log::error(trans('messages.error.destroy', 'Pool'), $e->getMessage());
-            return redirect()->back()->withErrors(trans('messages.error.destroy', 'Pool'));
+            return response(['message' => trans('messages.success.destroy', ['value' => 'Pool']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.destroy', ['value' => 'Pool']));
+            return response(['message' => trans('messages.error.destroy', ['value' => 'Pool']), 'status' => 'error']);
         }
     }
 }

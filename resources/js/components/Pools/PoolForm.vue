@@ -21,6 +21,8 @@
                             <v-flex xs12>
                                 <v-select
                                         :items="typeClients"
+                                        item-text="name"
+                                        item-value="id"
                                         label="Type of clients"
                                         v-model.number="payload.typeclient_id"
                                         required
@@ -30,6 +32,8 @@
                                 <v-select
                                         :items="products"
                                         label="Products"
+                                        item-text="name"
+                                        item-value="id"
                                         v-model.number="payload.product_id"
                                         required
                                 ></v-select>
@@ -42,7 +46,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                    <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
+                    <v-btn color="blue darken-1" flat @click="saveForm()">Save</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -51,24 +55,31 @@
 
 <script>
     export default {
-        name: "Form",
-        props: ['mode', 'entityName'],
+        name: "PoolForm",
+        props: ['typeClients', 'products'],
         data() {
             return {
                 dialog: false,
                 payload: this.makePayload(),
-                pools: [],
-                typeClients: []
             }
         },
         methods: {
             makePayload() {
                 return {
                     name: '',
-                    numberclients: 0,
+                    numberclients: null,
                     typeclient_id: null,
                     product_id: null,
                 }
+            },
+
+            saveForm() {
+                let payload = {...this.payload}
+                axios.post('/api/pools', payload).then(r => {
+                    this.$emit('refresh');
+                    this.dialog = false;
+                    this.makePayload();
+                })
             }
         }
     }

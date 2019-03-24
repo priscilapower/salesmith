@@ -6,7 +6,7 @@
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <pool-form></pool-form>
+            <pool-form :type-clients="typeClients" :products="products" @refresh="fetchData()"></pool-form>
         </v-layout>
         <v-layout>
             <v-data-table
@@ -15,14 +15,16 @@
                     class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
-                    <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">
-                        {{ props.item.numberclients }}
-                    </td>
-                    <td class="text-xs-right">
-                        {{ props.item.typeclient_name }}
-                    </td>
-                    <td class="text-xs-right">{{ props.item.product_name }}</td>
+                    <tr @click="helpers.goLink(`/pool/${props.item.id}`)">
+                        <td>{{ props.item.name }}</td>
+                        <td class="text-xs-right">
+                            {{ props.item.numberclients }}
+                        </td>
+                        <td class="text-xs-right">
+                            {{ props.item.typeclient_name }}
+                        </td>
+                        <td class="text-xs-right">{{ props.item.product_name }}</td>
+                    </tr>
                 </template>
             </v-data-table>
         </v-layout>
@@ -30,6 +32,7 @@
 </template>
 
 <script>
+    import {helpers} from "../../plugins/helpers";
     import PoolForm from "./PoolForm";
 
     export default {
@@ -39,7 +42,10 @@
         },
         data() {
             return {
+                helpers,
                 pools: [],
+                typeClients: [],
+                products: [],
                 headers: [
                     {
                         text: "Pool name",
@@ -84,8 +90,30 @@
 
             };
         },
+        created() {
+            this.fetchData();
+            this.getTypeClients();
+            this.getProducts();
+        },
         mounted() {
             this.$root.pageTitle = "Pools";
+        },
+        methods: {
+            fetchData() {
+                axios.get('/api/pools').then( response => {
+                    this.pools = response.data;
+                });
+            },
+            getTypeClients() {
+                axios.get('/api/type-clients').then( response => {
+                    this.typeClients = response.data;
+                });
+            },
+            getProducts() {
+                axios.get('/api/products').then( response => {
+                    this.products = response.data;
+                });
+            }
         }
     }
 </script>
