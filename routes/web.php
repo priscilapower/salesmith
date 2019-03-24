@@ -11,10 +11,31 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-//Auth::routes();
+Route::redirect('/home', '/dashboard');
+Route::redirect('/', '/dashboard');
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+
+/*POOLS*/
+Route::get('/pool/{id}', function () {
+    return view('pool');
+});
+Route::get('/pools', function () {
+    return view('pools');
+});
+
+/*CLIENTS*/
+Route::get('/clients', function () {
+    return view('clients');
+});
+
+/*CONTACTS*/
+Route::get('/contacts', function () {
+    return view('contacts');
+});

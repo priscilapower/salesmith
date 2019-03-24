@@ -27,7 +27,11 @@ window.Vue = require("vue");
 
 import "./plugins/vuetify";
 
-import Dashboard from "./components/Dashboard.vue";
+import Dashboard from "./components/Dashboard/Dashboard.vue";
+import Pools from "./components/Pools/Pools.vue";
+import Pool from "./components/Pools/Pool.vue";
+import Clients from "./components/Clients/Clients.vue";
+import Contacts from "./components/Contacts/Contacts.vue";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "vuetify/dist/vuetify.min.css";
@@ -37,9 +41,32 @@ Vue.use(Vuetify);
 const app = new Vue({
     el: "#app",
     components: {
-        Dashboard
+        Dashboard,
+        Clients,
+        Contacts,
+        Pool,
+        Pools,
+    },
+    provide: function (){
+        return {
+            user: this.user
+        };
+    },
+    mounted() {
+        this.parseAttributes();
     },
     data: {
-        pageTitle: "Manager Dashboard"
+        user: {},
+        pageTitle: "Loading..."
+    },
+    methods: {
+        parseAttributes() {
+            this.user = this.$el.attributes.user ? JSON.parse(this.$el.attributes.user.value) : {};
+        },
+        signout() {
+            axios.post('/logout').then(()=>{
+                console.log('logout')
+            })
+        }
     }
 });
