@@ -53,7 +53,7 @@
         },
         methods: {
             fetchData() {
-                axios.get(`/api/pools/${this.pool.id}`).then( response => {
+                axios.get(`/api/pools/${this.pool.id}/edit`).then( response => {
                     this.pool = response.data;
                 });
             },

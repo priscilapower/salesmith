@@ -2320,7 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this = this;
 
-      axios.get("/api/pools/".concat(this.pool.id)).then(function (response) {
+      axios.get("/api/pools/".concat(this.pool.id, "/edit")).then(function (response) {
         _this.pool = response.data;
       });
     },
