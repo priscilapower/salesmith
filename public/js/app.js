@@ -77354,6 +77354,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_dist_vuetify_min_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vuetify_dist_vuetify_min_css__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _plugins_helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./plugins/helpers */ "./resources/js/plugins/helpers.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -77389,6 +77390,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 Vue.use(vuetify__WEBPACK_IMPORTED_MODULE_9___default.a);
+
 var app = new Vue({
   el: "#app",
   components: {
@@ -77416,7 +77418,7 @@ var app = new Vue({
     },
     signout: function signout() {
       axios.post('/logout').then(function () {
-        console.log('logout');
+        _plugins_helpers__WEBPACK_IMPORTED_MODULE_10__["helpers"].goLink('/');
       });
     }
   }

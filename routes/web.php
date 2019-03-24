@@ -11,31 +11,41 @@
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+
 
 Route::redirect('/home', '/dashboard');
-Route::redirect('/', '/dashboard');
 
+Route::get('/', function () {
+    if (!Auth::user()) {
+        return redirect()->route('login');
+    }
+    return redirect()->route('dashboard');
+});
 
 Auth::routes();
 
+Route::middleware('timeout', 'auth')->group(function() {
 
-/*POOLS*/
-Route::get('/pool/{id}', function () {
-    return view('pool');
-});
-Route::get('/pools', function () {
-    return view('pools');
-});
+    /*DASHBOARD*/
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 
-/*CLIENTS*/
-Route::get('/clients', function () {
-    return view('clients');
-});
+    /*POOLS*/
+    Route::get( '/pool/{id}', function () {
+        return view( 'pool' );
+    } );
+    Route::get( '/pools', function () {
+        return view( 'pools' );
+    } );
 
-/*CONTACTS*/
-Route::get('/contacts', function () {
-    return view('contacts');
+    /*CLIENTS*/
+    Route::get( '/clients', function () {
+        return view( 'clients' );
+    } );
+
+    /*CONTACTS*/
+    Route::get( '/contacts', function () {
+        return view( 'contacts' );
+    } );
 });
