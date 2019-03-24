@@ -31,9 +31,9 @@ USER root
 
 # Add a non-root user to prevent files being created with root permissions on host machine.
 ARG PUID=1000
-ENV PUID ${PUID}
+ENV PUID 1000
 ARG PGID=1000
-ENV PGID ${PGID}
+ENV PGID 1000
 
 # always run apt update when start and after add new source list, then clean up at end.
 RUN set -xe; \
@@ -79,7 +79,7 @@ RUN set -xe; \
 ###########################################################################
 
 ARG TZ=UTC
-ENV TZ ${TZ}
+ENV TZ UTC
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
