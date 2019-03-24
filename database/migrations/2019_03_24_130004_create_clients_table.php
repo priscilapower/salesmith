@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePoolsTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreatePoolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pools', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('numberclients');
-            $table->foreign('typeclient_id')->references('id')->on('typeclient');
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('status');
+            $table->integer('user_id');
+            $table->integer('pool_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('pool_id')->references('id')->on('pools');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreatePoolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pools');
+        Schema::dropIfExists('clients');
     }
 }
