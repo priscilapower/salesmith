@@ -17,9 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
-Route::group( [ ['prefix' => 'admin',['middleware' => ['role:admin|manager', 'auth:api']]] ], function()
-{
-    Route::resource('pool', 'PoolController');
+Route::group(['role:admin|manager', 'auth'], function(){
+    Route::resource('pools', 'PoolController');
 });

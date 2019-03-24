@@ -12,7 +12,7 @@ class Pool extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'numberclients', 'typeclient_id', 'product_id'
+        'name', 'numberclients', 'type_client_id', 'product_id'
     ];
 
     /**
