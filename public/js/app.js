@@ -1763,7 +1763,46 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
+/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1785,44 +1824,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Client",
-  props: ['id', 'client'],
+  props: ["id", "client"],
   components: {
-    ClientForm: _ClientForm__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ClientForm: _ClientForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      typeClients: [],
-      products: []
+      users: [],
+      pools: []
     };
   },
-  watch: {
-    id: function (_id) {
-      function id() {
-        return _id.apply(this, arguments);
-      }
-
-      id.toString = function () {
-        return _id.toString();
-      };
-
-      return id;
-    }(function () {
-      console.log(id);
-
-      if (this.id) {
-        console.log(this.id);
-        this.fetchData();
-      }
-    })
-  },
   created: function created() {
-    this.getTypeClients();
-    this.getProducts();
-
-    if (this.id) {
-      console.log(this.id);
-      this.fetchData();
-    }
+    this.getPools();
+    this.getUsers();
   },
   mounted: function mounted() {
     this.$root.pageTitle = "Client ".concat(this.id);
@@ -1835,18 +1849,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.client = response.data;
       });
     },
-    getTypeClients: function getTypeClients() {
+    getUsers: function getUsers() {
       var _this2 = this;
 
-      axios.get('/api/type-clients').then(function (response) {
-        _this2.typeClients = response.data;
+      axios.get("/api/users").then(function (response) {
+        _this2.users = response.data;
       });
     },
-    getProducts: function getProducts() {
+    getPools: function getPools() {
       var _this3 = this;
 
-      axios.get('/api/products').then(function (response) {
-        _this3.products = response.data;
+      axios.get("/api/pools").then(function (response) {
+        _this3.pools = response.data;
       });
     }
   }
@@ -1993,6 +2007,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
+/* harmony import */ var _plugins_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../plugins/helpers */ "./resources/js/plugins/helpers.js");
+//
+//
+//
 //
 //
 //
@@ -2033,6 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Clients",
   components: {
@@ -2040,6 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      helpers: _plugins_helpers__WEBPACK_IMPORTED_MODULE_1__["helpers"],
       users: [],
       pools: [],
       clients: [],
@@ -2540,6 +2560,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pool",
@@ -2576,11 +2625,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getTypeClients();
     this.getProducts();
-
-    if (this.id) {
-      console.log(this.id);
-      this.fetchData();
-    }
   },
   mounted: function mounted() {
     this.$root.pageTitle = "Pool ".concat(this.id);
@@ -39453,8 +39497,8 @@ var render = function() {
           _c("client-form", {
             attrs: {
               "payload-edit": _vm.client,
-              "type-clients": _vm.typeClients,
-              products: _vm.products
+              pools: _vm.pools,
+              users: _vm.users
             },
             on: {
               refresh: function($event) {
@@ -39466,7 +39510,87 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-layout", [_vm._v("\n\n        " + _vm._s(_vm.client) + "\n\n    ")])
+      _c(
+        "v-layout",
+        [
+          [
+            _c(
+              "v-form",
+              [
+                _c(
+                  "v-container",
+                  [
+                    _c(
+                      "v-layout",
+                      { attrs: { row: "", wrap: "" } },
+                      [
+                        _c(
+                          "v-flex",
+                          { attrs: { xs12: "" } },
+                          [
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.name : "",
+                                label: "Name",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.email : "",
+                                label: "Email",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.phone : "",
+                                label: "Phone",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.status : "",
+                                label: "Status",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.user_id : "",
+                                label: "Salesperson",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.pool_id : "",
+                                label: "Pool",
+                                readonly: ""
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
+        ],
+        2
+      )
     ],
     1
   )
@@ -39800,47 +39924,61 @@ var render = function() {
                 key: "items",
                 fn: function(props) {
                   return [
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.email) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.phone) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.status) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.pool_id) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.user_id) +
-                          "\n                "
-                      )
-                    ])
+                    _c(
+                      "tr",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.helpers.goLink(
+                              "/client/" + props.item.id
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.email) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.phone) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.status) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.pool_id) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.user_id) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
+                    )
                   ]
                 }
               }
@@ -40573,7 +40711,71 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-layout", [_vm._v("\n\n        " + _vm._s(_vm.pool) + "\n\n    ")])
+      _c(
+        "v-layout",
+        [
+          [
+            _c(
+              "v-form",
+              [
+                _c(
+                  "v-container",
+                  [
+                    _c(
+                      "v-layout",
+                      { attrs: { row: "", wrap: "" } },
+                      [
+                        _c(
+                          "v-flex",
+                          { attrs: { xs12: "" } },
+                          [
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.name : "",
+                                label: "Name",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.numberclients : "",
+                                label: "Number of clients",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.type_client_id : "",
+                                label: "Type of client",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.product_id : "",
+                                label: "Product",
+                                readonly: ""
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
+        ],
+        2
+      )
     ],
     1
   )

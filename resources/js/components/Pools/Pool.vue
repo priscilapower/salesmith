@@ -72,9 +72,6 @@
         created() {
             this.getTypeClients();
             this.getProducts();
-            if(this.id) {
-                console.log(this.id)
-            }
         },
         mounted() {
             this.$root.pageTitle = `Pool ${this.id}`;

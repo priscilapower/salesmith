@@ -15,22 +15,25 @@
                 class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
-                    <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">
-                        {{ props.item.email }}
-                    </td>
-                    <td class="text-xs-right">
-                        {{ props.item.phone }}
-                    </td>
-                    <td class="text-xs-right">
-                        {{ props.item.status }}
-                    </td>
-                    <td class="text-xs-right">
-                        {{ props.item.pool_id }}
-                    </td>
-                    <td class="text-xs-right">
-                        {{ props.item.user_id }}
-                    </td>
+                    <tr @click="helpers.goLink(`/client/${props.item.id}`)">
+                        <td>{{ props.item.name }}</td>
+                        <td class="text-xs-right">
+                            {{ props.item.email }}
+                        </td>
+                        <td class="text-xs-right">
+                            {{ props.item.phone }}
+                        </td>
+                        <td class="text-xs-right">
+                            {{ props.item.status }}
+                        </td>
+                        <td class="text-xs-right">
+                            {{ props.item.pool_id }}
+                        </td>
+                        <td class="text-xs-right">
+                            {{ props.item.user_id }}
+                        </td>
+                    </tr>
+
                 </template>
             </v-data-table>
         </v-layout>
@@ -39,6 +42,8 @@
 
 <script>
 import ClientForm from "./ClientForm";
+import {helpers} from "../../plugins/helpers";
+
 export default {
     name: "Clients",
     components: {
@@ -46,6 +51,7 @@ export default {
     },
     data() {
         return {
+            helpers,
             users: [],
             pools: [],
             clients: [],
