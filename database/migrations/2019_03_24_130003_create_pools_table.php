@@ -17,9 +17,9 @@ class CreatePoolsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('numberclients');
-            $table->integer('typeclient_id');
-            $table->integer('product_id');
-            $table->foreign('typeclient_id')->references('id')->on('typeclients');
+            $table->bigInteger('type_client_id')->unsigned();
+            $table->foreign('type_client_id')->references('id')->on('type_clients');
+            $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });

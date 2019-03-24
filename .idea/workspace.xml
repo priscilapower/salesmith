@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="61a9e1c2-4669-440e-9901-2972a5a2778c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_130208_create_pools_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_130629_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130002_create_products_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_130758_create_type_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130001_create_type_clients_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_131129_create_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130004_create_clients_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_131818_create_contacts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130005_create_contacts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_130004_create_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130004_create_clients_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_24_130005_create_contacts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_24_130005_create_contacts_table.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130004_create_clients_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="22" column="39" lean-forward="true" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+            <state relative-caret-position="315">
+              <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -41,17 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130005_create_contacts_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="23" column="74" selection-start-line="22" selection-start-column="12" selection-end-line="23" selection-end-column="74" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130001_create_type_clients_table.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+            <state relative-caret-position="262">
+              <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -59,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+            <state relative-caret-position="202">
+              <caret line="19" column="60" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -95,6 +84,7 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_03_24_130208_create_pools_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_24_131129_create_clients_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_24_131818_create_contacts_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_03_24_130001_create_type_clients_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_24_130004_create_clients_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_24_130005_create_contacts_table.php" />
@@ -260,12 +250,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553432226564</updated>
-      <workItem from="1553432228257" duration="4304000" />
+      <workItem from="1553432228257" duration="5349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4304000" />
+    <option name="totallyTimeSpent" value="5349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
@@ -366,31 +356,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130001_create_type_clients_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        <state relative-caret-position="195">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130001_create_type_clients_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130003_create_pools_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+        <state relative-caret-position="202">
+          <caret line="19" column="60" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130004_create_clients_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="39" lean-forward="true" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+        <state relative-caret-position="315">
+          <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_24_130005_create_contacts_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="23" column="74" selection-start-line="22" selection-start-column="12" selection-end-line="23" selection-end-column="74" />
+        <state relative-caret-position="262">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
         </state>
       </provider>
     </entry>
