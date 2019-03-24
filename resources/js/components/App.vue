@@ -17,6 +17,7 @@
 
     <v-content>
       <dashboard-manager></dashboard-manager>
+      <dashboard-sales></dashboard-sales>
     </v-content>
   </v-app>
 </template>
@@ -24,10 +25,12 @@
 <script>
 
   import DashboardManager from "./DashboardManager";
+  import DashboardSales from "./DashboardSales";
 export default {
   name: 'App',
   components: {
-      DashboardManager
+      DashboardManager,
+      DashboardSales,
   },
   data () {
     return {
