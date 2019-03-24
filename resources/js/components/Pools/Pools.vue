@@ -92,8 +92,8 @@
         },
         created() {
             this.fetchData();
-            this.getTypeClients();
-            this.getProducts();
+            //this.getTypeClients();
+            //this.getProducts();
         },
         mounted() {
             this.$root.pageTitle = "Pools";

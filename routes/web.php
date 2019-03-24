@@ -40,6 +40,9 @@ Route::middleware('auth')->group(function() {
     } );
 
     /*CLIENTS*/
+    Route::get( '/client/{id}', function ($id) {
+        return view( 'client' , ['id' => $id, 'client' => \App\Client::find($id)]);
+    } );
     Route::get( '/clients', function () {
         return view( 'clients' );
     } );

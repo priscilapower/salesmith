@@ -13,14 +13,11 @@
         <v-layout>
             <v-data-table
                 :headers="headers"
-                :items="contacts"
+                :items="products"
                 class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
-                    <td>{{ props.item.product_name }}</td>
-                    <td class="text-xs-right">
-                        {{ props.item.product_status }}
-                    </td>
+                    <td>{{ props.item.name }}</td>
                 </template>
             </v-data-table>
         </v-layout>
@@ -32,30 +29,29 @@ export default {
     name: "Products",
     data() {
         return {
-            contacts: [],
+            products: [],
             headers: [
                 {
                     text: "Product name",
                     align: "left",
                     sortable: true,
-                    value: "product_name"
-                },
-                {
-                    text: "Product status",
-                    align: "left",
-                    sortable: true,
-                    value: "product_status"
+                    value: "name"
                 },
             ]
         };
+    },
+    created() {
+        this.fetchData();
     },
     mounted() {
         this.$root.pageTitle = "Products";
     },
     methods: {
-        newContact() {
-            console.warn("*");
-        }
+        fetchData() {
+            axios.get('/api/products').then( response => {
+                this.products = response.data;
+            });
+        },
     }
 };
 </script>

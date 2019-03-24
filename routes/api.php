@@ -17,10 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['role:admin|manager', 'auth'], function(){
-    Route::resource('pools', 'PoolController');
+Route::group(['role:admin|manager|salesPerson', 'auth'], function(){
     Route::resource('type-clients', 'TypeClientController');
     Route::resource('products', 'ProductController');
     Route::resource('clients', 'ClientController');
     Route::resource('contacts', 'ContactController');
+});
+
+Route::group(['role:admin|manager', 'auth'], function(){
+    Route::resource('pools', 'PoolController');
+});
+
+Route::group(['role:admin|manager', 'auth'], function(){
+    Route::resource('users', 'UserController');
 });
