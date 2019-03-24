@@ -6,7 +6,7 @@
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <pool-form :payload="pool" :type-clients="typeClients" :products="products" @refresh="fetchData()"></pool-form>
+            <pool-form :payload-edit="pool" :type-clients="typeClients" :products="products" @refresh="fetchData()"></pool-form>
         </v-layout>
         <v-layout>
 

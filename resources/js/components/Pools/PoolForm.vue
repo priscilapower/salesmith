@@ -2,7 +2,7 @@
     <v-layout row justify-center>
         <v-dialog v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">New Pool</v-btn>
+                <v-btn color="primary" dark v-on="on">{{payloadEdit ? 'Edit Pool' : 'New Pool'}}</v-btn>
             </template>
             <v-card>
                 <v-card-title class="text-sm-right">
@@ -56,11 +56,18 @@
 <script>
     export default {
         name: "PoolForm",
-        props: ['typeClients', 'products'],
+        props: ['typeClients', 'products', 'payloadEdit'],
         data() {
             return {
                 dialog: false,
                 payload: this.makePayload(),
+            }
+        },
+        watch: {
+            payloadEdit() {
+                if (this.payloadEdit.hasOwnProperty('id')) {
+                    this.payload = {...this.payloadEdit}
+                }
             }
         },
         methods: {
