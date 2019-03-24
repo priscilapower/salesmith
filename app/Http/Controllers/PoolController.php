@@ -32,7 +32,7 @@ class PoolController extends Controller
             $pool = Pool::create($request->all());
             return response(['pool' => $pool, 'message' => trans('messages.success.store', ['value' => 'Pool']), 'status' => 'success']);
         } catch (\Exception $e) {
-            Log::error(trans('messages.error.store', ['value' => 'Pool']));
+            Log::error(trans('messages.error.store', ['value' => 'Pool']), ['message' => $e->getMessage()]);
             return response(['message' => trans('messages.error.store', ['value' => 'Pool']), 'status' => 'error']);
         }
     }
@@ -51,7 +51,7 @@ class PoolController extends Controller
 
             return response($pool);
         } catch (\Exception $e) {
-            Log::error(trans('messages.error.find', ['value' => 'Pool']));
+            Log::error(trans('messages.error.find', ['value' => 'Pool']), ['message' => $e->getMessage()]);
             return response(['message' => trans('messages.error.find', ['value' => 'Pool']), 'status' => 'error']);
         }
     }
@@ -87,7 +87,7 @@ class PoolController extends Controller
 
             return response(['message' => trans('messages.success.destroy', ['value' => 'Pool']), 'status' => 'success']);
         } catch (\Exception $e) {
-            Log::error(trans('messages.error.destroy', ['value' => 'Pool']));
+            Log::error(trans('messages.error.destroy', ['value' => 'Pool']), ['message' => $e->getMessage()]);
             return response(['message' => trans('messages.error.destroy', ['value' => 'Pool']), 'status' => 'error']);
         }
     }
