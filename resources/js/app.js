@@ -47,7 +47,26 @@ const app = new Vue({
         Pool,
         Pools,
     },
+    provide: function (){
+        return {
+            user: this.user
+        };
+    },
+    mounted() {
+        this.parseAttributes();
+    },
     data: {
+        user: {},
         pageTitle: "Loading..."
+    },
+    methods: {
+        parseAttributes() {
+            this.user = this.$el.attributes.user ? JSON.parse(this.$el.attributes.user.value) : {};
+        },
+        signout() {
+            axios.post('/logout').then(()=>{
+                console.log('logout')
+            })
+        }
     }
 });

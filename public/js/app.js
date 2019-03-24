@@ -2035,7 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.$parent.pageTitle = "Manager Dashboard";
+    this.$root.pageTitle = "Manager Dashboard";
   }
 });
 
@@ -77398,8 +77398,27 @@ var app = new Vue({
     Pool: _components_Pools_Pool_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     Pools: _components_Pools_Pools_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  provide: function provide() {
+    return {
+      user: this.user
+    };
+  },
+  mounted: function mounted() {
+    this.parseAttributes();
+  },
   data: {
+    user: {},
     pageTitle: "Loading..."
+  },
+  methods: {
+    parseAttributes: function parseAttributes() {
+      this.user = this.$el.attributes.user ? JSON.parse(this.$el.attributes.user.value) : {};
+    },
+    signout: function signout() {
+      axios.post('/logout').then(function () {
+        console.log('logout');
+      });
+    }
   }
 });
 
@@ -78069,8 +78088,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/hackathon/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/hackathon/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/samoliver/Code/salesmith/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/samoliver/Code/salesmith/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

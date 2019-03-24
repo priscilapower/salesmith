@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Auth::routes();
+Route::redirect('/home', '/dashboard');
+Route::redirect('/', '/dashboard');
 
+
+Auth::routes();
 
 
 /*POOLS*/
