@@ -15,6 +15,8 @@
 <script>
     export default {
         name: "Pools",
+        components: {
+        },
         mounted() {
             this.$root.pageTitle = "Pool";
         }
