@@ -27,7 +27,11 @@ window.Vue = require("vue");
 
 import "./plugins/vuetify";
 
-import Dashboard from "./components/Dashboard.vue";
+import Dashboard from "./components/Dashboard/Dashboard.vue";
+import Pools from "./components/Pools/Pools.vue";
+import Pool from "./components/Pools/Pool.vue";
+import Clients from "./components/Clients/Clients.vue";
+import Contacts from "./components/Contacts/Contacts.vue";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "vuetify/dist/vuetify.min.css";
@@ -37,9 +41,13 @@ Vue.use(Vuetify);
 const app = new Vue({
     el: "#app",
     components: {
-        Dashboard
+        Dashboard,
+        Clients,
+        Contacts,
+        Pool,
+        Pools,
     },
     data: {
-        pageTitle: "Manager Dashboard"
+        pageTitle: "Loading..."
     }
 });

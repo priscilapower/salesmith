@@ -116,7 +116,7 @@
 </template>
 
 <script>
-    import {helpers} from "../plugins/helpers";
+    import {helpers} from "../../plugins/helpers";
 
     export default {
     name: "DashboardManager",
@@ -125,8 +125,15 @@
             helpers,
             trend: [6, 7, 8, 3, 5, 9, 3, 1]
         };
-    }
+    },
+        mounted() {
+            this.$parent.pageTitle = "Manager Dashboard";
+        }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+</style>

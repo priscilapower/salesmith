@@ -108,7 +108,7 @@
 </template>
 
 <script>
-    import {helpers} from "../plugins/helpers";
+    import {helpers} from "../../plugins/helpers";
 
     export default {
     name: "DashboardSales",
@@ -119,6 +119,9 @@
             poolStats: [{id: 1}],
         };
     },
+        mounted() {
+            this.$parent.pageTitle = "Sales Dashboard";
+        }
 };
 </script>
 
