@@ -26,21 +26,21 @@
 
                             <v-flex xs12>
                                 <v-select
-                                        :items="typeClients"
+                                        :items="pools"
                                         item-text="name"
                                         item-value="id"
-                                        label="TSalesperson"
-                                        v-model.number="payload.typeclient_id"
+                                        label="Pool"
+                                        v-model.number="payload.pool_id"
                                         required
                                 ></v-select>
                             </v-flex>
                             <v-flex xs12>
                                 <v-select
-                                        :items="products"
-                                        label="Products"
+                                        :items="users"
+                                        label="Salesperson"
                                         item-text="name"
                                         item-value="id"
-                                        v-model.number="payload.product_id"
+                                        v-model.number="payload.user_id"
                                         required
                                 ></v-select>
                             </v-flex>
@@ -62,7 +62,7 @@
 <script>
     export default {
         name: "ClientForm",
-        props: ['typeClients', 'products', 'payloadEdit'],
+        props: ['payloadEdit', 'pools', 'users'],
         data() {
             return {
                 dialog: false,
@@ -80,9 +80,11 @@
             makePayload() {
                 return {
                     name: '',
-                    numberclients: null,
-                    typeclient_id: null,
-                    product_id: null,
+                    email: '',
+                    phone: '',
+                    status: '',
+                    user_id: null,
+                    pool_id: null,
                 }
             },
 

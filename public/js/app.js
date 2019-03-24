@@ -1763,7 +1763,46 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
+/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1785,44 +1824,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Client",
-  props: ['id', 'client'],
+  props: ["id", "client"],
   components: {
-    ClientForm: _ClientForm__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ClientForm: _ClientForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      typeClients: [],
-      products: []
+      users: [],
+      pools: []
     };
   },
-  watch: {
-    id: function (_id) {
-      function id() {
-        return _id.apply(this, arguments);
-      }
-
-      id.toString = function () {
-        return _id.toString();
-      };
-
-      return id;
-    }(function () {
-      console.log(id);
-
-      if (this.id) {
-        console.log(this.id);
-        this.fetchData();
-      }
-    })
-  },
   created: function created() {
-    this.getTypeClients();
-    this.getProducts();
-
-    if (this.id) {
-      console.log(this.id);
-      this.fetchData();
-    }
+    this.getPools();
+    this.getUsers();
   },
   mounted: function mounted() {
     this.$root.pageTitle = "Client ".concat(this.id);
@@ -1835,18 +1849,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.client = response.data;
       });
     },
-    getTypeClients: function getTypeClients() {
+    getUsers: function getUsers() {
       var _this2 = this;
 
-      axios.get('/api/type-clients').then(function (response) {
-        _this2.typeClients = response.data;
+      axios.get("/api/users").then(function (response) {
+        _this2.users = response.data;
       });
     },
-    getProducts: function getProducts() {
+    getPools: function getPools() {
       var _this3 = this;
 
-      axios.get('/api/products').then(function (response) {
-        _this3.products = response.data;
+      axios.get("/api/pools").then(function (response) {
+        _this3.pools = response.data;
       });
     }
   }
@@ -1930,7 +1944,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ClientForm",
-  props: ['typeClients', 'products', 'payloadEdit'],
+  props: ['payloadEdit', 'pools', 'users'],
   data: function data() {
     return {
       dialog: false,
@@ -1948,9 +1962,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     makePayload: function makePayload() {
       return {
         name: '',
-        numberclients: null,
-        typeclient_id: null,
-        product_id: null
+        email: '',
+        phone: '',
+        status: '',
+        user_id: null,
+        pool_id: null
       };
     },
     saveForm: function saveForm() {
@@ -1990,6 +2006,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
+/* harmony import */ var _plugins_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../plugins/helpers */ "./resources/js/plugins/helpers.js");
 //
 //
 //
@@ -2031,10 +2049,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Clients",
+  components: {
+    ClientForm: _ClientForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
+      helpers: _plugins_helpers__WEBPACK_IMPORTED_MODULE_1__["helpers"],
       users: [],
       pools: [],
       clients: [],
@@ -2062,19 +2087,19 @@ __webpack_require__.r(__webpack_exports__);
         text: "Pool",
         align: "left",
         sortable: true,
-        value: "pool_name"
+        value: "pool_id"
       }, {
         text: "Salesperson",
         align: "left",
         sortable: true,
-        value: "salesperson_name"
+        value: "user_id"
       }]
     };
   },
   created: function created() {
     this.fetchData();
-    /* this.getTypeClients();
-     this.getProducts();*/
+    this.getPools();
+    this.getUsers();
   },
   mounted: function mounted() {
     this.$root.pageTitle = "Clients";
@@ -2083,22 +2108,22 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this = this;
 
-      axios.get('/api/clients').then(function (response) {
+      axios.get("/api/clients").then(function (response) {
         _this.clients = response.data;
       });
     },
-    getTypeClients: function getTypeClients() {
+    getUsers: function getUsers() {
       var _this2 = this;
 
-      axios.get('/api/type-clients').then(function (response) {
-        _this2.typeClients = response.data;
+      axios.get("/api/users").then(function (response) {
+        _this2.users = response.data;
       });
     },
-    getProducts: function getProducts() {
+    getPools: function getPools() {
       var _this3 = this;
 
-      axios.get('/api/products').then(function (response) {
-        _this3.products = response.data;
+      axios.get("/api/pools").then(function (response) {
+        _this3.pools = response.data;
       });
     }
   }
@@ -2535,6 +2560,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pool",
@@ -2571,11 +2625,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getTypeClients();
     this.getProducts();
-
-    if (this.id) {
-      console.log(this.id);
-      this.fetchData();
-    }
   },
   mounted: function mounted() {
     this.$root.pageTitle = "Pool ".concat(this.id);
@@ -39448,8 +39497,8 @@ var render = function() {
           _c("client-form", {
             attrs: {
               "payload-edit": _vm.client,
-              "type-clients": _vm.typeClients,
-              products: _vm.products
+              pools: _vm.pools,
+              users: _vm.users
             },
             on: {
               refresh: function($event) {
@@ -39461,7 +39510,87 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-layout", [_vm._v("\n\n        " + _vm._s(_vm.client) + "\n\n    ")])
+      _c(
+        "v-layout",
+        [
+          [
+            _c(
+              "v-form",
+              [
+                _c(
+                  "v-container",
+                  [
+                    _c(
+                      "v-layout",
+                      { attrs: { row: "", wrap: "" } },
+                      [
+                        _c(
+                          "v-flex",
+                          { attrs: { xs12: "" } },
+                          [
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.name : "",
+                                label: "Name",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.email : "",
+                                label: "Email",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.phone : "",
+                                label: "Phone",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.status : "",
+                                label: "Status",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.user_id : "",
+                                label: "Salesperson",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.client ? _vm.client.pool_id : "",
+                                label: "Pool",
+                                readonly: ""
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
+        ],
+        2
+      )
     ],
     1
   )
@@ -39623,22 +39752,22 @@ var render = function() {
                             [
                               _c("v-select", {
                                 attrs: {
-                                  items: _vm.typeClients,
+                                  items: _vm.pools,
                                   "item-text": "name",
                                   "item-value": "id",
-                                  label: "TSalesperson",
+                                  label: "Pool",
                                   required: ""
                                 },
                                 model: {
-                                  value: _vm.payload.typeclient_id,
+                                  value: _vm.payload.pool_id,
                                   callback: function($$v) {
                                     _vm.$set(
                                       _vm.payload,
-                                      "typeclient_id",
+                                      "pool_id",
                                       _vm._n($$v)
                                     )
                                   },
-                                  expression: "payload.typeclient_id"
+                                  expression: "payload.pool_id"
                                 }
                               })
                             ],
@@ -39651,22 +39780,22 @@ var render = function() {
                             [
                               _c("v-select", {
                                 attrs: {
-                                  items: _vm.products,
-                                  label: "Products",
+                                  items: _vm.users,
+                                  label: "Salesperson",
                                   "item-text": "name",
                                   "item-value": "id",
                                   required: ""
                                 },
                                 model: {
-                                  value: _vm.payload.product_id,
+                                  value: _vm.payload.user_id,
                                   callback: function($$v) {
                                     _vm.$set(
                                       _vm.payload,
-                                      "product_id",
+                                      "user_id",
                                       _vm._n($$v)
                                     )
                                   },
-                                  expression: "payload.product_id"
+                                  expression: "payload.user_id"
                                 }
                               })
                             ],
@@ -39772,18 +39901,14 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { color: "primary" },
-              on: {
-                click: function($event) {
-                  return _vm.newContact()
-                }
+          _c("client-form", {
+            attrs: { pools: _vm.pools, users: _vm.users },
+            on: {
+              refresh: function($event) {
+                return _vm.fetchData()
               }
-            },
-            [_c("span", { staticClass: "mr-2" }, [_vm._v("New client")])]
-          )
+            }
+          })
         ],
         1
       ),
@@ -39799,47 +39924,61 @@ var render = function() {
                 key: "items",
                 fn: function(props) {
                   return [
-                    _c("td", [_vm._v(_vm._s(props.item.name))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.email) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.phone) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.status) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.pool_name) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-xs-right" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(props.item.salesperson_name) +
-                          "\n                "
-                      )
-                    ])
+                    _c(
+                      "tr",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.helpers.goLink(
+                              "/client/" + props.item.id
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("td", [_vm._v(_vm._s(props.item.name))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.email) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.phone) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.status) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.pool_id) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-right" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.user_id) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
+                    )
                   ]
                 }
               }
@@ -40572,7 +40711,71 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-layout", [_vm._v("\n\n        " + _vm._s(_vm.pool) + "\n\n    ")])
+      _c(
+        "v-layout",
+        [
+          [
+            _c(
+              "v-form",
+              [
+                _c(
+                  "v-container",
+                  [
+                    _c(
+                      "v-layout",
+                      { attrs: { row: "", wrap: "" } },
+                      [
+                        _c(
+                          "v-flex",
+                          { attrs: { xs12: "" } },
+                          [
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.name : "",
+                                label: "Name",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.numberclients : "",
+                                label: "Number of clients",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.type_client_id : "",
+                                label: "Type of client",
+                                readonly: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                value: _vm.pool ? _vm.pool.product_id : "",
+                                label: "Product",
+                                readonly: ""
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
+        ],
+        2
+      )
     ],
     1
   )

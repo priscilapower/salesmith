@@ -10,7 +10,36 @@
         </v-layout>
         <v-layout>
 
-            {{pool}}
+            <template>
+                <v-form>
+                    <v-container>
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <v-text-field
+                                    :value="pool ? pool.name : ''"
+                                    label="Name"
+                                    readonly
+                                ></v-text-field>
+                                <v-text-field
+                                    :value="pool ? pool.numberclients : ''"
+                                    label="Number of clients"
+                                    readonly
+                                ></v-text-field>
+                                <v-text-field
+                                    :value="pool ? pool.type_client_id : ''"
+                                    label="Type of client"
+                                    readonly
+                                ></v-text-field>
+                                <v-text-field
+                                    :value="pool ? pool.product_id : ''"
+                                    label="Product"
+                                    readonly
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-form>
+            </template>
 
         </v-layout>
     </v-container>
@@ -43,10 +72,6 @@
         created() {
             this.getTypeClients();
             this.getProducts();
-            if(this.id) {
-                console.log(this.id)
-                this.fetchData();
-            }
         },
         mounted() {
             this.$root.pageTitle = `Pool ${this.id}`;

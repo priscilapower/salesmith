@@ -6,71 +6,95 @@
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <client-form :payload-edit="client" :type-clients="typeClients" :products="products" @refresh="fetchData()"></client-form>
+            <client-form :payload-edit="client" :pools="pools" :users="users" @refresh="fetchData()"></client-form>
         </v-layout>
         <v-layout>
 
-            {{client}}
+            <template>
+                <v-form>
+                    <v-container>
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <v-text-field
+                                        :value="client ? client.name : ''"
+                                        label="Name"
+                                        readonly
+                                ></v-text-field>
+                                <v-text-field
+                                        :value="client ? client.email : ''"
+                                        label="Email"
+                                        readonly
+                                ></v-text-field>
+                                <v-text-field
+                                        :value="client ? client.phone : ''"
+                                        label="Phone"
+                                        readonly
+                                ></v-text-field>
+                                <v-text-field
+                                        :value="client ? client.status : ''"
+                                        label="Status"
+                                        readonly
+                                ></v-text-field>
+                                <v-text-field
+                                        :value="client ? client.user_id : ''"
+                                        label="Salesperson"
+                                        readonly
+                                ></v-text-field>
+                                <v-text-field
+                                        :value="client ? client.pool_id : ''"
+                                        label="Pool"
+                                        readonly
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-form>
+            </template>
 
         </v-layout>
     </v-container>
 </template>
 
 <script>
-    import ClientForm from "./ClientForm";
+import ClientForm from "./ClientForm";
 
-    export default {
-        name: "Client",
-        props: ['id', 'client'],
-        components: {
-            ClientForm,
+export default {
+    name: "Client",
+    props: ["id", "client"],
+    components: {
+        ClientForm
+    },
+    data() {
+        return {
+            users: [],
+            pools: []
+        };
+    },
+    created() {
+        this.getPools();
+        this.getUsers();
+    },
+    mounted() {
+        this.$root.pageTitle = `Client ${this.id}`;
+    },
+    methods: {
+        fetchData() {
+            axios.get(`/api/clients/${this.client.id}/edit`).then(response => {
+                this.client = response.data;
+            });
         },
-        data() {
-            return {
-                typeClients: [],
-                products: [],
-            };
+        getUsers() {
+            axios.get("/api/users").then(response => {
+                this.users = response.data;
+            });
         },
-        watch: {
-            id(){
-                console.log(id);
-                if(this.id) {
-                    console.log(this.id)
-                    this.fetchData();
-                }
-            }
-        },
-        created() {
-            this.getTypeClients();
-            this.getProducts();
-            if(this.id) {
-                console.log(this.id)
-                this.fetchData();
-            }
-        },
-        mounted() {
-            this.$root.pageTitle = `Client ${this.id}`;
-        },
-        methods: {
-            fetchData() {
-                axios.get(`/api/clients/${this.client.id}/edit`).then( response => {
-                    this.client = response.data;
-                });
-            },
-            getTypeClients() {
-                axios.get('/api/type-clients').then( response => {
-                    this.typeClients = response.data;
-                });
-            },
-            getProducts() {
-                axios.get('/api/products').then( response => {
-                    this.products = response.data;
-                });
-            }
+        getPools() {
+            axios.get("/api/pools").then(response => {
+                this.pools = response.data;
+            });
         }
     }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
