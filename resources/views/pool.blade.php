@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<pools></pools>
+<pool :id="{{$id}}"></pool>
 @endsection

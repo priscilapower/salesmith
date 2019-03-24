@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function() {
     })->name('dashboard');;
 
     /*POOLS*/
-    Route::get( '/pool/{id}', function () {
-        return view( 'pool' );
+    Route::get( '/pool/{id}', function ($id) {
+        return view( 'pool' , ['id' => $id]);
     } );
     Route::get( '/pools', function () {
         return view( 'pools' );

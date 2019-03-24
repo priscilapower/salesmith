@@ -2252,6 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PoolForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PoolForm */ "./resources/js/components/Pools/PoolForm.vue");
 //
 //
 //
@@ -2266,11 +2267,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Pools",
-  components: {},
+  name: "Pool",
+  props: ['id'],
+  components: {
+    PoolForm: _PoolForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      pool: {},
+      typeClients: [],
+      products: []
+    };
+  },
+  watch: {
+    id: function (_id) {
+      function id() {
+        return _id.apply(this, arguments);
+      }
+
+      id.toString = function () {
+        return _id.toString();
+      };
+
+      return id;
+    }(function () {
+      console.log(id);
+
+      if (this.id) {
+        console.log(id);
+        this.fetchData();
+      }
+    })
+  },
+  created: function created() {
+    this.getTypeClients();
+    this.getProducts();
+
+    if (this.id) {
+      console.log(this.id);
+      this.fetchData();
+    }
+  },
   mounted: function mounted() {
-    this.$root.pageTitle = "Pool";
+    this.$root.pageTitle = "Pool ".concat(this.id);
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get("/api/pool/".concat(this.pool.id)).then(function (response) {
+        _this.pool = response.data;
+      });
+    },
+    getTypeClients: function getTypeClients() {
+      var _this2 = this;
+
+      axios.get('/api/type-clients').then(function (response) {
+        _this2.typeClients = response.data.data;
+      });
+    },
+    getProducts: function getProducts() {
+      var _this3 = this;
+
+      axios.get('/api/products').then(function (response) {
+        _this3.products = response.data.data;
+      });
+    }
   }
 });
 
@@ -39849,15 +39917,40 @@ var render = function() {
       _c(
         "v-layout",
         [
-          _c("v-btn", { attrs: { flat: "", href: "/" } }, [
-            _c("span", { staticClass: "mr-2" }, [
-              _vm._v("Back to the Dashboard")
-            ])
-          ]),
-          _vm._v("\n        Pool details!\n    ")
+          _c(
+            "v-btn",
+            { attrs: { flat: "", href: "/" } },
+            [
+              _c("v-icon", { attrs: { left: "" } }, [
+                _vm._v("keyboard_backspace")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "mr-2" }, [
+                _vm._v("Back to the Dashboard")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("pool-form", {
+            attrs: {
+              payload: _vm.pool,
+              "type-clients": _vm.typeClients,
+              products: _vm.products
+            },
+            on: {
+              refresh: function($event) {
+                return _vm.fetchData()
+              }
+            }
+          })
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("v-layout", [_vm._v("\n\n        " + _vm._s(_vm.pool) + "\n\n    ")])
     ],
     1
   )
