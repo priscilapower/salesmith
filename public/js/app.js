@@ -1930,7 +1930,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ClientForm",
-  props: ['typeClients', 'products', 'payloadEdit'],
+  props: ['payloadEdit', 'pools', 'users'],
   data: function data() {
     return {
       dialog: false,
@@ -1948,9 +1948,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     makePayload: function makePayload() {
       return {
         name: '',
-        numberclients: null,
-        typeclient_id: null,
-        product_id: null
+        email: '',
+        phone: '',
+        status: '',
+        user_id: null,
+        pool_id: null
       };
     },
     saveForm: function saveForm() {
@@ -1990,6 +1992,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClientForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientForm */ "./resources/js/components/Clients/ClientForm.vue");
 //
 //
 //
@@ -2029,10 +2032,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Clients",
+  components: {
+    ClientForm: _ClientForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       users: [],
@@ -2062,19 +2067,19 @@ __webpack_require__.r(__webpack_exports__);
         text: "Pool",
         align: "left",
         sortable: true,
-        value: "pool_name"
+        value: "pool_id"
       }, {
         text: "Salesperson",
         align: "left",
         sortable: true,
-        value: "salesperson_name"
+        value: "user_id"
       }]
     };
   },
   created: function created() {
     this.fetchData();
-    /* this.getTypeClients();
-     this.getProducts();*/
+    this.getPools();
+    this.getUsers();
   },
   mounted: function mounted() {
     this.$root.pageTitle = "Clients";
@@ -2083,22 +2088,22 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this = this;
 
-      axios.get('/api/clients').then(function (response) {
+      axios.get("/api/clients").then(function (response) {
         _this.clients = response.data;
       });
     },
-    getTypeClients: function getTypeClients() {
+    getUsers: function getUsers() {
       var _this2 = this;
 
-      axios.get('/api/type-clients').then(function (response) {
-        _this2.typeClients = response.data;
+      axios.get("/api/users").then(function (response) {
+        _this2.users = response.data;
       });
     },
-    getProducts: function getProducts() {
+    getPools: function getPools() {
       var _this3 = this;
 
-      axios.get('/api/products').then(function (response) {
-        _this3.products = response.data;
+      axios.get("/api/pools").then(function (response) {
+        _this3.pools = response.data;
       });
     }
   }
@@ -39623,22 +39628,22 @@ var render = function() {
                             [
                               _c("v-select", {
                                 attrs: {
-                                  items: _vm.typeClients,
+                                  items: _vm.pools,
                                   "item-text": "name",
                                   "item-value": "id",
-                                  label: "TSalesperson",
+                                  label: "Pool",
                                   required: ""
                                 },
                                 model: {
-                                  value: _vm.payload.typeclient_id,
+                                  value: _vm.payload.pool_id,
                                   callback: function($$v) {
                                     _vm.$set(
                                       _vm.payload,
-                                      "typeclient_id",
+                                      "pool_id",
                                       _vm._n($$v)
                                     )
                                   },
-                                  expression: "payload.typeclient_id"
+                                  expression: "payload.pool_id"
                                 }
                               })
                             ],
@@ -39651,22 +39656,22 @@ var render = function() {
                             [
                               _c("v-select", {
                                 attrs: {
-                                  items: _vm.products,
-                                  label: "Products",
+                                  items: _vm.users,
+                                  label: "Salesperson",
                                   "item-text": "name",
                                   "item-value": "id",
                                   required: ""
                                 },
                                 model: {
-                                  value: _vm.payload.product_id,
+                                  value: _vm.payload.user_id,
                                   callback: function($$v) {
                                     _vm.$set(
                                       _vm.payload,
-                                      "product_id",
+                                      "user_id",
                                       _vm._n($$v)
                                     )
                                   },
-                                  expression: "payload.product_id"
+                                  expression: "payload.user_id"
                                 }
                               })
                             ],
@@ -39772,18 +39777,14 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { color: "primary" },
-              on: {
-                click: function($event) {
-                  return _vm.newContact()
-                }
+          _c("client-form", {
+            attrs: { pools: _vm.pools, users: _vm.users },
+            on: {
+              refresh: function($event) {
+                return _vm.fetchData()
               }
-            },
-            [_c("span", { staticClass: "mr-2" }, [_vm._v("New client")])]
-          )
+            }
+          })
         ],
         1
       ),
@@ -39828,7 +39829,7 @@ var render = function() {
                     _c("td", { staticClass: "text-xs-right" }, [
                       _vm._v(
                         "\n                    " +
-                          _vm._s(props.item.pool_name) +
+                          _vm._s(props.item.pool_id) +
                           "\n                "
                       )
                     ]),
@@ -39836,7 +39837,7 @@ var render = function() {
                     _c("td", { staticClass: "text-xs-right" }, [
                       _vm._v(
                         "\n                    " +
-                          _vm._s(props.item.salesperson_name) +
+                          _vm._s(props.item.user_id) +
                           "\n                "
                       )
                     ])
