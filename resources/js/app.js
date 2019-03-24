@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require("./bootstrap");
 
 window.Vue = require("vue");
@@ -38,6 +39,8 @@ import "vuetify/dist/vuetify.min.css";
 import Vuetify from "vuetify";
 Vue.use(Vuetify);
 
+import {helpers} from "./plugins/helpers";
+
 const app = new Vue({
     el: "#app",
     components: {
@@ -65,7 +68,7 @@ const app = new Vue({
         },
         signout() {
             axios.post('/logout').then(()=>{
-                console.log('logout')
+                helpers.goLink('/')
             })
         }
     }
