@@ -13,7 +13,7 @@
         <v-layout>
             <v-data-table
                     :headers="headers"
-                    :items="contacts"
+                    :items="typeClients"
                     class="elevation-1 w-100"
             >
                 <template v-slot:items="props">
@@ -29,7 +29,7 @@
         name: "TypeClients",
         data() {
             return {
-                contacts: [],
+                typeClients: [],
                 headers: [
                     {
                         text: "Name",
@@ -42,6 +42,16 @@
         },
         mounted() {
             this.$root.pageTitle = "Client types";
+        },
+        created() {
+            this.fetchData();
+        },
+        methods: {
+            fetchData() {
+                axios.get('/api/type-clients').then( response => {
+                    this.typeClients = response.data;
+                });
+            },
         }
     }
 </script>

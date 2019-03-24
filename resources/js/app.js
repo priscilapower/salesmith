@@ -31,6 +31,7 @@ import "./plugins/vuetify";
 import Dashboard from "./components/Dashboard/Dashboard.vue";
 import Pools from "./components/Pools/Pools.vue";
 import Pool from "./components/Pools/Pool.vue";
+import Client from "./components/Clients/Client.vue";
 import Clients from "./components/Clients/Clients.vue";
 import Contacts from "./components/Contacts/Contacts.vue";
 import Products from "./components/Products/Products.vue";
@@ -47,6 +48,7 @@ const app = new Vue({
     el: "#app",
     components: {
         Dashboard,
+        Client,
         Clients,
         Contacts,
         Pool,
