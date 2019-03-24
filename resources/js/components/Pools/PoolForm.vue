@@ -82,11 +82,20 @@
 
             saveForm() {
                 let payload = {...this.payload}
-                axios.post('/api/pools', payload).then(r => {
-                    this.$emit('refresh');
-                    this.dialog = false;
-                    this.makePayload();
-                })
+                if (this.payloadEdit) {
+                    axios.put(`/api/pools/${this.payloadEdit.id}`, payload).then(r => {
+                        this.$emit('refresh');
+                        this.dialog = false;
+                        this.makePayload();
+                    })
+                } else {
+                    axios.post('/api/pools', payload).then(r => {
+                        this.$emit('refresh');
+                        this.dialog = false;
+                        this.makePayload();
+                    })
+                }
+
             }
         }
     }

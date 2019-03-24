@@ -53,18 +53,18 @@
         },
         methods: {
             fetchData() {
-                axios.get(`/api/pool/${this.pool.id}`).then( response => {
+                axios.get(`/api/pools/${this.pool.id}/edit`).then( response => {
                     this.pool = response.data;
                 });
             },
             getTypeClients() {
                 axios.get('/api/type-clients').then( response => {
-                    this.typeClients = response.data.data;
+                    this.typeClients = response.data;
                 });
             },
             getProducts() {
                 axios.get('/api/products').then( response => {
-                    this.products = response.data.data;
+                    this.products = response.data;
                 });
             }
         }

@@ -2320,7 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this = this;
 
-      axios.get("/api/pool/".concat(this.pool.id)).then(function (response) {
+      axios.get("/api/pools/".concat(this.pool.id, "/edit")).then(function (response) {
         _this.pool = response.data;
       });
     },
@@ -2328,14 +2328,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/api/type-clients').then(function (response) {
-        _this2.typeClients = response.data.data;
+        _this2.typeClients = response.data;
       });
     },
     getProducts: function getProducts() {
       var _this3 = this;
 
       axios.get('/api/products').then(function (response) {
-        _this3.products = response.data.data;
+        _this3.products = response.data;
       });
     }
   }
@@ -2441,13 +2441,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var payload = _objectSpread({}, this.payload);
 
-      axios.post('/api/pools', payload).then(function (r) {
-        _this.$emit('refresh');
+      if (this.payloadEdit) {
+        axios.put("/api/pools/".concat(this.payloadEdit.id), payload).then(function (r) {
+          _this.$emit('refresh');
 
-        _this.dialog = false;
+          _this.dialog = false;
 
-        _this.makePayload();
-      });
+          _this.makePayload();
+        });
+      } else {
+        axios.post('/api/pools', payload).then(function (r) {
+          _this.$emit('refresh');
+
+          _this.dialog = false;
+
+          _this.makePayload();
+        });
+      }
     }
   }
 });
