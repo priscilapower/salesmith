@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -13,17 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $product = Product::all();
+        return response($product);
     }
 
     /**
@@ -34,18 +27,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        try {
+            $product = Product::create($request->all());
+            return response(['pool' => $product, 'message' => trans('messages.success.store', ['value' => 'Product']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.store', ['value' => 'Product']));
+            return response(['message' => trans('messages.error.store', ['value' => 'Product']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -56,7 +44,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+            $product = Product::find($id);
+
+            return response($product);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.find', ['value' => 'Product']));
+            return response(['message' => trans('messages.error.find', ['value' => 'Product']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -68,7 +63,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $product = Product::find($id)->update($request->all());
+
+            return response(['pool' => $product, 'message' => trans('messages.success.update', ['value' => 'Product']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            Log::error(trans('messages.error.update', ['value' => 'Product']));
+            return response(['message' => trans('messages.error.update', ['value' => 'Product']), 'status' => 'error']);
+        }
     }
 
     /**
@@ -79,6 +82,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Product::destroy($id);
+
+            return response(['message' => trans('messages.success.destroy', ['value' => 'Product']), 'status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error(trans('messages.error.destroy', ['value' => 'Product']));
+            return response(['message' => trans('messages.error.destroy', ['value' => 'Product']), 'status' => 'error']);
+        }
     }
 }
