@@ -11,9 +11,11 @@
         [v-cloak] > * { display:none }
     </style>
 
+    @stack('styles')
+
 </head>
 <body>
-    <div id="app" user="{{Auth::user()}}" roles="{{auth()->user()->roles}}" v-cloak>
+    <div id="app" user="{{Auth::user()}}" roles="{{auth()->user()->roles ?? 'admin'}}" v-cloak>
         <v-app>
             <v-toolbar app>
                 <v-toolbar-title class="headline text-uppercase">
