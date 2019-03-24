@@ -64,7 +64,7 @@ const app = new Vue({
     },
     data: {
         user: {},
-        pageTitle: "Loading..."
+        pageTitle: ""
     },
     methods: {
         parseAttributes() {
