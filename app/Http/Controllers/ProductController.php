@@ -68,7 +68,6 @@ class ProductController extends Controller
 
             return response(['pool' => $product, 'message' => trans('messages.success.update', ['value' => 'Product']), 'status' => 'success']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
             Log::error(trans('messages.error.update', ['value' => 'Product']));
             return response(['message' => trans('messages.error.update', ['value' => 'Product']), 'status' => 'error']);
         }

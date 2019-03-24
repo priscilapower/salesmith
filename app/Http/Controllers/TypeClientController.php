@@ -68,7 +68,6 @@ class TypeClientController extends Controller
 
             return response(['pool' => $typeClient, 'message' => trans('messages.success.update', ['value' => 'TypeClient']), 'status' => 'success']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
             Log::error(trans('messages.error.update', ['value' => 'TypeClient']));
             return response(['message' => trans('messages.error.update', ['value' => 'TypeClient']), 'status' => 'error']);
         }
