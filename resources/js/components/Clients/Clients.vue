@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: "Pools",
+        name: "Clients",
         mounted() {
             this.$root.pageTitle = "Clients";
         }

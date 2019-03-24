@@ -33,6 +33,8 @@ import Pools from "./components/Pools/Pools.vue";
 import Pool from "./components/Pools/Pool.vue";
 import Clients from "./components/Clients/Clients.vue";
 import Contacts from "./components/Contacts/Contacts.vue";
+import Products from "./components/Products/Products.vue";
+import TypeClients from "./components/TypeClients/TypeClients.vue";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "vuetify/dist/vuetify.min.css";
@@ -49,6 +51,8 @@ const app = new Vue({
         Contacts,
         Pool,
         Pools,
+        Products,
+        TypeClients,
     },
     provide: function (){
         return {

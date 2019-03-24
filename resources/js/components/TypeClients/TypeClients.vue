@@ -7,16 +7,16 @@
             >
                 <span class="mr-2">Back to the Dashboard</span>
             </v-btn>
-            Pools!
+            Clients!
         </v-layout>
     </v-container>
 </template>
 
 <script>
     export default {
-        name: "Pool",
+        name: "TypeClients",
         mounted() {
-            this.$root.pageTitle = "Pool";
+            this.$root.pageTitle = "Client types";
         }
     }
 </script>

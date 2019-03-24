@@ -24,12 +24,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware('timeout', 'auth')->group(function() {
+Route::middleware('auth')->group(function() {
 
     /*DASHBOARD*/
     Route::get('/dashboard', function () {
         return view('dashboard');
-    });
+    })->name('dashboard');;
 
     /*POOLS*/
     Route::get( '/pool/{id}', function () {
@@ -47,5 +47,15 @@ Route::middleware('timeout', 'auth')->group(function() {
     /*CONTACTS*/
     Route::get( '/contacts', function () {
         return view( 'contacts' );
+    } );
+
+    /*PRODUCTS*/
+    Route::get( '/products', function () {
+        return view( 'products' );
+    } );
+
+    /*PRODUCTS*/
+    Route::get( '/type-clients', function () {
+        return view( 'type_clients' );
     } );
 });
